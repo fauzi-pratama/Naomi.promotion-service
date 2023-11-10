@@ -1,66 +1,102 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"type": "docker-build",
-			"label": "docker-build: debug",
-			"dependsOn": [
-				"build"
-			],
-			"dockerBuild": {
-				"tag": "naomipromotionservice:dev",
-				"target": "base",
-				"dockerfile": "${workspaceFolder}/Naomi.promotion-service/Dockerfile",
-				"context": "${workspaceFolder}",
-				"pull": true
-			},
-			"netCore": {
-				"appProject": "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj"
-			}
-		},
-		{
-			"type": "docker-build",
-			"label": "docker-build: release",
-			"dependsOn": [
-				"build"
-			],
-			"dockerBuild": {
-				"tag": "naomipromotionservice:latest",
-				"dockerfile": "${workspaceFolder}/Naomi.promotion-service/Dockerfile",
-				"context": "${workspaceFolder}",
-				"platform": {
-					"os": "linux",
-					"architecture": "amd64"
-				},
-				"pull": true
-			},
-			"netCore": {
-				"appProject": "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj"
-			}
-		},
-		{
-			"type": "docker-run",
-			"label": "docker-run: debug",
-			"dependsOn": [
-				"docker-build: debug"
-			],
-			"dockerRun": {},
-			"netCore": {
-				"appProject": "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj",
-				"enableDebugging": true,
-				"configureSsl": false
-			}
-		},
-		{
-			"type": "docker-run",
-			"label": "docker-run: release",
-			"dependsOn": [
-				"docker-build: release"
-			],
-			"dockerRun": {},
-			"netCore": {
-				"appProject": "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj"
-			}
-		}
-	]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary;ForceNoAlign"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary;ForceNoAlign"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build: debug",
+            "dependsOn": [
+                "build"
+            ],
+            "dockerBuild": {
+                "tag": "naomipromotionservice:dev",
+                "target": "base",
+                "dockerfile": "${workspaceFolder}/Naomi.promotion-service/Dockerfile",
+                "context": "${workspaceFolder}",
+                "pull": true
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj"
+            }
+        },
+        {
+            "type": "docker-build",
+            "label": "docker-build: release",
+            "dependsOn": [
+                "build"
+            ],
+            "dockerBuild": {
+                "tag": "naomipromotionservice:latest",
+                "dockerfile": "${workspaceFolder}/Naomi.promotion-service/Dockerfile",
+                "context": "${workspaceFolder}",
+                "platform": {
+                    "os": "linux",
+                    "architecture": "amd64"
+                },
+                "pull": true
+            },
+            "netCore": {
+                "appProject": "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj"
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: debug",
+            "dependsOn": [
+                "docker-build: debug"
+            ],
+            "dockerRun": {},
+            "netCore": {
+                "appProject": "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj",
+                "enableDebugging": true,
+                "configureSsl": false
+            }
+        },
+        {
+            "type": "docker-run",
+            "label": "docker-run: release",
+            "dependsOn": [
+                "docker-build: release"
+            ],
+            "dockerRun": {},
+            "netCore": {
+                "appProject": "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj"
+            }
+        }
+    ]
 }
