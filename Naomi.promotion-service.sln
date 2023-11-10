@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{640CEFCB-14B8-427B-9B1D-EF0D02EAAE47}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Naomi.promotion-service", "Naomi.promotion-service\Naomi.promotion-service.csproj", "{68F3E722-DF0B-4154-A439-11D9A28E51EC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Naomi.promotion-library", "Naomi.promotion-library\Naomi.promotion-library.csproj", "{637BB69D-CAAC-479C-B844-D38FC63416EA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Naomi.promotion-test", "Naomi.promotion-test\Naomi.promotion-test.csproj", "{4B7F4361-DE9A-4231-978C-6E6E332A063E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68F3E722-DF0B-4154-A439-11D9A28E51EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68F3E722-DF0B-4154-A439-11D9A28E51EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68F3E722-DF0B-4154-A439-11D9A28E51EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68F3E722-DF0B-4154-A439-11D9A28E51EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{637BB69D-CAAC-479C-B844-D38FC63416EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{637BB69D-CAAC-479C-B844-D38FC63416EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{637BB69D-CAAC-479C-B844-D38FC63416EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{637BB69D-CAAC-479C-B844-D38FC63416EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B7F4361-DE9A-4231-978C-6E6E332A063E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B7F4361-DE9A-4231-978C-6E6E332A063E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B7F4361-DE9A-4231-978C-6E6E332A063E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B7F4361-DE9A-4231-978C-6E6E332A063E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

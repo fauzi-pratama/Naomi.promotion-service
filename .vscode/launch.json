@@ -1,0 +1,29 @@
+{
+    "configurations": [
+        {
+            "name": "PROMOTION",
+            "type": "coreclr",
+            "request": "launch",
+            "program": "${workspaceFolder}/Naomi.promotion-service/bin/Debug/net6.0/Naomi.promotion-service.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Naomi.promotion-service",
+            "stopAtEntry": false,
+            // "serverReadyAction": {
+            //     "action": "openExternally",
+            //     "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            // },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            }
+        },
+        {
+            "name": "Docker .NET Launch",
+            "type": "docker",
+            "request": "launch",
+            "preLaunchTask": "docker-run: debug",
+            "netCore": {
+                "appProject": "${workspaceFolder}/Naomi.promotion-service/Naomi.promotion-service.csproj"
+            }
+        }
+    ]
+}

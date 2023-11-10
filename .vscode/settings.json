@@ -1,0 +1,10 @@
+{
+  "files.exclude": {
+    "Naomi.promotion-library\\obj": true,
+    "Naomi.promotion-service\\obj": true,
+    "Naomi.promotion-service\\bin": true,
+    "Naomi.promotion-test\\obj": true,
+    "Naomi.promotion-test\\bin": true,
+    "Naomi.promotion-library\\bin": true
+  }
+}
