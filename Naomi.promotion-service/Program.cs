@@ -1,9 +1,11 @@
 
 //Config App
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using Naomi.promotion_service.Configurations;
 using Naomi.promotion_service.Models.Contexts;
 using Naomi.promotion_service.Services.SAPService;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,13 +48,25 @@ builder.Services.AddControllers();
 
 //Config Swagger
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c => {
+    c.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        Description = "Standart Authorize Bearer",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    c.OperationFilter<SecurityRequirementsOperationFilter>();
+});
 
 var app = builder.Build();
 
 //Run Swagger
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c => {
+    c.DefaultModelsExpandDepth(-1);
+});
 
 //Run Https
 app.UseHttpsRedirection();
