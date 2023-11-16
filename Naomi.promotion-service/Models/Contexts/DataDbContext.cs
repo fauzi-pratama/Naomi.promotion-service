@@ -8,7 +8,6 @@ namespace Naomi.promotion_service.Models.Contexts
     {
         public DataDbContext(DbContextOptions<DataDbContext> options) : base(options)
         {
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true); //for set timestamp without timezone     
         }
 
         public DbSet<PromoWorkflow> PromoWorkflow { get; set; }

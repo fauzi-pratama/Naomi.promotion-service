@@ -3,6 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using Naomi.promotion_service.Configurations;
 using Naomi.promotion_service.Models.Contexts;
+using Naomi.promotion_service.Services.SAPService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,9 @@ builder.Services.AddCap(x =>
 
     x.UseDashboard();
 });
+
+//Dependency Injection
+builder.Services.AddScoped<ISAPService, SAPService>();
 
 //Config Controller
 builder.Services.AddControllers();
