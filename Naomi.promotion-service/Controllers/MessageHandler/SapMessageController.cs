@@ -20,7 +20,7 @@ namespace Naomi.promotion_service.Controllers.MessageHandler
 
         [NonAction]
         [CapSubscribe("site")]
-        public async Task HandleSiteMessage(IntegrationMessage message)
+        public async Task HandleSiteMessage(ServiceMessage message)
         {
             if (message == null || message.SyncData == null)
             {
@@ -55,7 +55,7 @@ namespace Naomi.promotion_service.Controllers.MessageHandler
 
         [NonAction]
         [CapSubscribe("mop")]
-        public async Task HandleMopMessage(IntegrationMessage message)
+        public async Task HandleMopMessage(ServiceMessage message)
         {
             if (message == null || message.SyncData == null)
             {

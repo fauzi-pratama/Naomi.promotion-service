@@ -1,12 +1,16 @@
 
-//Config App
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Filters;
 using Naomi.promotion_service.Configurations;
 using Naomi.promotion_service.Models.Contexts;
 using Naomi.promotion_service.Services.SAPService;
-using Swashbuckle.AspNetCore.Filters;
+using Naomi.promotion_service.Services.OtpPromoService;
+using Naomi.promotion_service.Services.FindPromoService;
+using Naomi.promotion_service.Services.PromoSetupService;
+using Naomi.promotion_service.Services.SoftBookingService;
 
+//Config App
 var builder = WebApplication.CreateBuilder(args);
 
 //Config Env
@@ -32,8 +36,8 @@ builder.Services.AddCap(x =>
         opt.Servers = appConfig.KafkaConnectionString!;
         opt.CustomHeaders = kafkaResult => new List<KeyValuePair<string, string>>
         {
-            new KeyValuePair<string, string>("cap-msg-id", Guid.NewGuid().ToString()),
-            new KeyValuePair<string, string>("cap-msg-name", kafkaResult.Topic)
+            new ("cap-msg-id", Guid.NewGuid().ToString()),
+            new ("cap-msg-name", kafkaResult.Topic)
         };
     });
 
@@ -41,7 +45,11 @@ builder.Services.AddCap(x =>
 });
 
 //Dependency Injection
+builder.Services.AddScoped<IOtpService, OtpService>();
 builder.Services.AddScoped<ISAPService, SAPService>();
+builder.Services.AddScoped<IFindPromoService, FindPromoService>();
+builder.Services.AddScoped<ISoftBookingService, SoftBookingService>();
+builder.Services.AddSingleton<IPromoSetupService, PromoSetupService>();
 
 //Config Controller
 builder.Services.AddControllers();

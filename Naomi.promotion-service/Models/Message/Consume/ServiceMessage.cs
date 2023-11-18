@@ -1,7 +1,7 @@
 ﻿
 namespace Naomi.promotion_service.Models.Message.Consume
 {
-    public class IntegrationMessage
+    public class ServiceMessage
     {
         public string? DocumentNumber { get; set; }
         public string? SyncName { get; set; }
