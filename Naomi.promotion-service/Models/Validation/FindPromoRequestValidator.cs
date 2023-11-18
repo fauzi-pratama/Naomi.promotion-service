@@ -8,7 +8,6 @@ namespace Naomi.promotion_service.Models.Validation
 {
     public class FindPromoRequestValidator : AbstractValidator<FindPromoRequest>
     {
-
         public FindPromoRequestValidator(DataDbContext dataDbContext)
         {
             RuleFor(x => x.TransId)

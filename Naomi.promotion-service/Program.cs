@@ -9,6 +9,7 @@ using Naomi.promotion_service.Services.OtpPromoService;
 using Naomi.promotion_service.Services.FindPromoService;
 using Naomi.promotion_service.Services.PromoSetupService;
 using Naomi.promotion_service.Services.SoftBookingService;
+using System.Reflection;
 
 //Config App
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,9 @@ AppConfig? appConfig = builder.Configuration.Get<AppConfig>();
 builder.Services.AddDbContext<DataDbContext>(options => {
     options.UseNpgsql(appConfig.PostgreSqlConnectionString!);
 });
+
+//Config Automapper
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 //Config Cap Kafka
 builder.Services.AddCap(x =>
