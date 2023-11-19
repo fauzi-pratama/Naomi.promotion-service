@@ -1,6 +1,8 @@
 
+using System.Reflection;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation.AspNetCore;
 using Swashbuckle.AspNetCore.Filters;
 using Naomi.promotion_service.Configurations;
 using Naomi.promotion_service.Models.Contexts;
@@ -9,7 +11,7 @@ using Naomi.promotion_service.Services.OtpPromoService;
 using Naomi.promotion_service.Services.FindPromoService;
 using Naomi.promotion_service.Services.PromoSetupService;
 using Naomi.promotion_service.Services.SoftBookingService;
-using System.Reflection;
+using Naomi.promotion_service.Services.WorkflowPromoService;
 
 //Config App
 var builder = WebApplication.CreateBuilder(args);
@@ -22,9 +24,6 @@ AppConfig? appConfig = builder.Configuration.Get<AppConfig>();
 builder.Services.AddDbContext<DataDbContext>(options => {
     options.UseNpgsql(appConfig.PostgreSqlConnectionString!);
 });
-
-//Config Automapper
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 //Config Cap Kafka
 builder.Services.AddCap(x =>
@@ -51,12 +50,24 @@ builder.Services.AddCap(x =>
 //Dependency Injection
 builder.Services.AddScoped<IOtpService, OtpService>();
 builder.Services.AddScoped<ISAPService, SAPService>();
+builder.Services.AddScoped<IWorkflowService, WorkflowService>();
 builder.Services.AddScoped<IFindPromoService, FindPromoService>();
 builder.Services.AddScoped<ISoftBookingService, SoftBookingService>();
 builder.Services.AddSingleton<IPromoSetupService, PromoSetupService>();
 
+//Background Service Setup Promo Workflow
+builder.Services.AddHostedService<InitialPromoBackground>();
+
+//Config Automapper
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 //Config Controller
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddFluentValidation(v =>
+{
+    v.ImplicitlyValidateChildProperties = true;
+    v.ImplicitlyValidateRootCollectionElements = true;
+    v.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+});
 
 //Config Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -73,6 +84,13 @@ builder.Services.AddSwaggerGen(c => {
 });
 
 var app = builder.Build();
+
+//Apply MigrateDb
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<DataDbContext>();
+    db.Database.Migrate();
+}
 
 //Run Swagger
 app.UseSwagger();

@@ -23,31 +23,6 @@ namespace Naomi.promotion_service.Models.Response
         public string? PromoImageLink { get; set; }
         public PromoMopRequire? PromoMopRequire { get; set; }
         public List<PromoListItem>? PromoListItem { get; set; }
-
-        public FindPromoResponse() { }
-
-        public FindPromoResponse(FindPromoResponse other)
-        {
-            TransId = other.TransId;
-            CompanyCode = other.CompanyCode;
-            PromoCode = other.PromoCode;
-            PromoName = other.PromoName;
-            PromoType = other.PromoType;
-            PromoTypeResult = other.PromoTypeResult;
-            ValDiscount = other.ValDiscount;
-            ValMaxDiscount = other.ValMaxDiscount;
-            PromoCls = other.PromoCls;
-            PromoLvl = other.PromoLvl;
-            MaxMultiple = other.MaxMultiple;
-            MaxUse = other.MaxUse;
-            MaxBalance = other.MaxBalance;
-            MultipleQty = other.MultipleQty;
-            PromoDesc = other.PromoDesc;
-            PromoTermCondition = other.PromoTermCondition;
-            PromoImageLink = other.PromoImageLink;
-            PromoMopRequire = other.PromoMopRequire;
-            PromoListItem = other.PromoListItem;
-        }
     }
 
     public class PromoMopRequire
@@ -55,29 +30,13 @@ namespace Naomi.promotion_service.Models.Response
         public string? MopPromoSelectionCode { get; set; }
         public string? MopPromoSelectionName { get; set; }
         public List<PromoMopRequireDetail>? PromoMopRequireDetail { get; set; }
-
-        public PromoMopRequire() { }
-
-        public PromoMopRequire(PromoMopRequire other)
-        {
-            MopPromoSelectionCode = other.MopPromoSelectionCode;
-            MopPromoSelectionName = other.MopPromoSelectionName;
-            PromoMopRequireDetail = other.PromoMopRequireDetail;
-        }
     }
 
     public class PromoMopRequireDetail
     {
         public string? MopGroupCode { get; set; }
         public string? MopGroupName { get; set; }
-
         public PromoMopRequireDetail() { }
-
-        public PromoMopRequireDetail(PromoMopRequireDetail other)
-        {
-            MopGroupCode = other.MopGroupCode;
-            MopGroupName = other.MopGroupName;
-        }
     }
 
     public class PromoListItem
@@ -88,18 +47,6 @@ namespace Naomi.promotion_service.Models.Response
         public decimal? TotalAfter { get; set; }
         public int? Rounding { get; set; }
         public List<PromoListItemDetail>? PromoListItemDetail { get; set; }
-
-        public PromoListItem() { }
-
-        public PromoListItem(PromoListItem other)
-        {
-            LinePromo = other.LinePromo;
-            TotalBefore = other.TotalBefore;
-            TotalDiscount = other.TotalDiscount;
-            TotalAfter = other.TotalAfter;
-            Rounding = other.Rounding;
-            PromoListItemDetail = other.PromoListItemDetail;
-        }
     }
 
     public class PromoListItemDetail
@@ -114,12 +61,5 @@ namespace Naomi.promotion_service.Models.Response
         public decimal? TotalDiscount { get; set; }
         public decimal? TotalAfter { get; set; }
         public PromoListItemDetail() { }
-    }
-
-    public class ItemGroupResultPerPromo
-    {
-        public string? SkuCode { get; set; }
-        public string? Value { get; set; }
-        public string? MaxValue { get; set; }
     }
 }

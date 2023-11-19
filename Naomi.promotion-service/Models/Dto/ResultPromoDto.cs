@@ -21,8 +21,8 @@ namespace Naomi.promotion_service.Models.Dto
         public string? PromoDesc { get; set; }
         public string? PromoTermCondition { get; set; }
         public string? PromoImageLink { get; set; }
-        public PromoMopRequire? PromoMopRequire { get; set; }
-        public List<PromoListItem>? PromoListItem { get; set; }
+        public PromoMopRequireDto? PromoMopRequire { get; set; }
+        public List<PromoListItemDto>? PromoListItem { get; set; }
 
         public ResultPromoDto() { }
 
@@ -50,15 +50,15 @@ namespace Naomi.promotion_service.Models.Dto
         }
     }
 
-    public class PromoMopRequire
+    public class PromoMopRequireDto
     {
         public string? MopPromoSelectionCode { get; set; }
         public string? MopPromoSelectionName { get; set; }
-        public List<PromoMopRequireDetail>? PromoMopRequireDetail { get; set; }
+        public List<PromoMopRequireDetailDto>? PromoMopRequireDetail { get; set; }
 
-        public PromoMopRequire() { }
+        public PromoMopRequireDto() { }
 
-        public PromoMopRequire(PromoMopRequire other)
+        public PromoMopRequireDto(PromoMopRequireDto other)
         {
             MopPromoSelectionCode = other.MopPromoSelectionCode;
             MopPromoSelectionName = other.MopPromoSelectionName;
@@ -66,32 +66,32 @@ namespace Naomi.promotion_service.Models.Dto
         }
     }
 
-    public class PromoMopRequireDetail
+    public class PromoMopRequireDetailDto
     {
         public string? MopGroupCode { get; set; }
         public string? MopGroupName { get; set; }
 
-        public PromoMopRequireDetail() { }
+        public PromoMopRequireDetailDto() { }
 
-        public PromoMopRequireDetail(PromoMopRequireDetail other)
+        public PromoMopRequireDetailDto(PromoMopRequireDetailDto other)
         {
             MopGroupCode = other.MopGroupCode;
             MopGroupName = other.MopGroupName;
         }
     }
 
-    public class PromoListItem
+    public class PromoListItemDto
     {
         public int LinePromo { get; set; }
         public decimal? TotalBefore { get; set; }
         public decimal? TotalDiscount { get; set; }
         public decimal? TotalAfter { get; set; }
         public int? Rounding { get; set; }
-        public List<PromoListItemDetail>? PromoListItemDetail { get; set; }
+        public List<PromoListItemDetailDto>? PromoListItemDetail { get; set; }
 
-        public PromoListItem() { }
+        public PromoListItemDto() { }
 
-        public PromoListItem(PromoListItem other)
+        public PromoListItemDto(PromoListItemDto other)
         {
             LinePromo = other.LinePromo;
             TotalBefore = other.TotalBefore;
@@ -102,7 +102,7 @@ namespace Naomi.promotion_service.Models.Dto
         }
     }
 
-    public class PromoListItemDetail
+    public class PromoListItemDetailDto
     {
         public int LineNo { get; set; }
         public string? SkuCode { get; set; }
@@ -113,10 +113,10 @@ namespace Naomi.promotion_service.Models.Dto
         public decimal? TotalPrice { get; set; }
         public decimal? TotalDiscount { get; set; }
         public decimal? TotalAfter { get; set; }
-        public PromoListItemDetail() { }
+        public PromoListItemDetailDto() { }
     }
 
-    public class ItemGroupResultPerPromo
+    public class ItemGroupResultPerPromoDto
     {
         public string? SkuCode { get; set; }
         public string? Value { get; set; }

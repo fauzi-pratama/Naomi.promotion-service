@@ -15,11 +15,11 @@ namespace Naomi.promotion_service.Models.Dto
         public Boolean Member { get; set; } = false;
         public Boolean NewMember { get; set; } = false;
         public string? StatusMember { get; set; }
-        public List<ItemProduct>? ItemProduct { get; set; }
+        public List<ItemProductDto>? ItemProduct { get; set; }
         public List<Mop>? Mop { get; set; }
     }
 
-    public class ItemProduct
+    public class ItemProductDto
     {
         public int LineNo { get; set; }
         public string? SkuCode { get; set; }

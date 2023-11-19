@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Naomi.promotion_service.Migrations
 {
     [DbContext(typeof(DataDbContext))]
-    [Migration("20231116072417_initial")]
+    [Migration("20231118140648_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -62,7 +62,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(8);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(7);
 
@@ -90,7 +90,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(10);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(9);
 
@@ -119,7 +119,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(5);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(4);
 
@@ -149,7 +149,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(7);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(6);
 
@@ -163,48 +163,48 @@ namespace Naomi.promotion_service.Migrations
                             Id = new Guid("302be9cd-5e08-454d-b8e5-582d336750d7"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1578),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3634),
                             LineNum = 1,
                             PromotionClassKey = "ITEM",
                             PromotionClassName = "ITEM",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1588)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3646)
                         },
                         new
                         {
                             Id = new Guid("8713bd36-48d6-43dd-94b9-407c3aff1528"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1592),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3651),
                             LineNum = 2,
                             PromotionClassKey = "CART",
                             PromotionClassName = "CART",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1592)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3652)
                         },
                         new
                         {
                             Id = new Guid("dbf358cb-f43b-4d69-9176-8ee63ac8953f"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1594),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3654),
                             LineNum = 3,
                             PromotionClassKey = "MOP",
                             PromotionClassName = "MOP",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1594)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3654)
                         },
                         new
                         {
                             Id = new Guid("c386c5f1-d3d2-4e7f-ad6a-34b4f185325c"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1596),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3656),
                             LineNum = 4,
                             PromotionClassKey = "Entertain",
                             PromotionClassName = "Entertain",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1597)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3657)
                         });
                 });
 
@@ -235,7 +235,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(6);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(5);
 
@@ -264,7 +264,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(8);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(7);
 
@@ -300,7 +300,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(5);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(4);
 
@@ -323,7 +323,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(7);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(6);
 
@@ -352,7 +352,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(6);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(5);
 
@@ -388,7 +388,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(8);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(7);
 
@@ -402,130 +402,130 @@ namespace Naomi.promotion_service.Migrations
                             Id = new Guid("fac8e236-2fb7-4b4a-b644-0680f60fd0a0"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1719),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3902),
                             LineNum = 1,
                             PromotionClassId = "302BE9CD-5E08-454D-B8E5-582D336750D7",
                             PromotionTypeKey = "ITEM",
                             PromotionTypeName = "BUY X GET Y ITEM",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1720)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3903)
                         },
                         new
                         {
                             Id = new Guid("e0d70f81-6a25-434d-9055-e50554ef585c"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1722),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3906),
                             LineNum = 1,
                             PromotionClassId = "302BE9CD-5E08-454D-B8E5-582D336750D7",
                             PromotionTypeKey = "SP",
                             PromotionTypeName = "SPECIAL PRICE ITEM",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1723)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3907)
                         },
                         new
                         {
                             Id = new Guid("1f57489b-cca0-4392-ae00-3d145012d375"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1724),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3910),
                             LineNum = 2,
                             PromotionClassId = "302BE9CD-5E08-454D-B8E5-582D336750D7",
                             PromotionTypeKey = "AMOUNT",
                             PromotionTypeName = "DISCOUNT AMOUNT ITEM",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1725)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3910)
                         },
                         new
                         {
                             Id = new Guid("886470d3-5e0b-41ed-baa7-10cd94511e10"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1726),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3913),
                             LineNum = 2,
                             PromotionClassId = "302BE9CD-5E08-454D-B8E5-582D336750D7",
                             PromotionTypeKey = "PERCENT",
                             PromotionTypeName = "DISCOUNT PERCENT ITEM",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1727)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3913)
                         },
                         new
                         {
                             Id = new Guid("bd4f0c46-7d03-45fa-b33c-77028218593a"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1728),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3915),
                             LineNum = 2,
                             PromotionClassId = "302BE9CD-5E08-454D-B8E5-582D336750D7",
                             PromotionTypeKey = "BUNDLE",
                             PromotionTypeName = "DISCOUNT BUNDLING ITEM",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1729)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3916)
                         },
                         new
                         {
                             Id = new Guid("86ed449a-e4bc-4c28-a6e5-3ba18e491e63"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1730),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3918),
                             LineNum = 2,
                             PromotionClassId = "8713BD36-48D6-43DD-94B9-407C3AFF1528",
                             PromotionTypeKey = "AMOUNT",
                             PromotionTypeName = "DISCOUNT AMOUNT CART",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1731)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3918)
                         },
                         new
                         {
                             Id = new Guid("2524251a-565a-46c0-93d5-deea80c63ff5"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1733),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3920),
                             LineNum = 2,
                             PromotionClassId = "8713BD36-48D6-43DD-94B9-407C3AFF1528",
                             PromotionTypeKey = "PERCENT",
                             PromotionTypeName = "DISCOUNT PERCENT CART",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1733)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3921)
                         },
                         new
                         {
                             Id = new Guid("3c7ed57d-8235-453f-8f97-ba93b3747b4f"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1735),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3923),
                             LineNum = 2,
                             PromotionClassId = "DBF358CB-F43B-4D69-9176-8EE63AC8953F",
                             PromotionTypeKey = "AMOUNT",
                             PromotionTypeName = "DISCOUNT AMOUNT MOP",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1735)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3923)
                         },
                         new
                         {
                             Id = new Guid("dda43968-95bd-4d94-8737-fd621d0a5895"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1736),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3925),
                             LineNum = 2,
                             PromotionClassId = "DBF358CB-F43B-4D69-9176-8EE63AC8953F",
                             PromotionTypeKey = "PERCENT",
                             PromotionTypeName = "DISCOUNT PERCENT MOP",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1737)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3926)
                         },
                         new
                         {
                             Id = new Guid("57ae0d50-1d3b-4a33-8d7c-a4cab863aa30"),
                             ActiveFlag = true,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1738),
+                            CreatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3929),
                             LineNum = 2,
                             PromotionClassId = "C386C5F1-D3D2-4E7F-AD6A-34B4F185325C",
                             PromotionTypeKey = "PERCENT",
                             PromotionTypeName = "DISCOUNT PERCENT Entertain",
                             UpdatedBy = "System",
-                            UpdatedDate = new DateTime(2023, 11, 16, 14, 24, 17, 134, DateTimeKind.Local).AddTicks(1739)
+                            UpdatedDate = new DateTime(2023, 11, 18, 21, 6, 48, 155, DateTimeKind.Local).AddTicks(3930)
                         });
                 });
 
@@ -549,7 +549,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(4);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(3);
 
@@ -573,7 +573,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(6);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(5);
 
@@ -609,7 +609,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(6);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(5);
 
@@ -641,7 +641,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(8);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(7);
 
@@ -683,12 +683,12 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(7);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(6);
 
                     b.Property<DateTime>("ExpDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("exp_date")
                         .HasColumnOrder(5);
 
@@ -710,7 +710,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(9);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(8);
 
@@ -751,12 +751,12 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(27);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(26);
 
                     b.Property<DateTime>("EndDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("end_date")
                         .HasColumnOrder(16);
 
@@ -878,7 +878,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(8);
 
                     b.Property<DateTime>("StartDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("max_discount")
                         .HasColumnOrder(15);
 
@@ -889,7 +889,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(29);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(28);
 
@@ -927,7 +927,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(5);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(4);
 
@@ -951,7 +951,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(7);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(6);
 
@@ -989,7 +989,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(9);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(8);
 
@@ -1034,7 +1034,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(11);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(10);
 
@@ -1065,7 +1065,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(4);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(3);
 
@@ -1088,7 +1088,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(6);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(5);
 
@@ -1119,7 +1119,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(8);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(7);
 
@@ -1168,7 +1168,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(10);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(9);
 
@@ -1199,7 +1199,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(9);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(8);
 
@@ -1250,7 +1250,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(11);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(10);
 
@@ -1259,6 +1259,68 @@ namespace Naomi.promotion_service.Migrations
                     b.HasIndex("PromoRuleId");
 
                     b.ToTable("promo_rule_result");
+                });
+
+            modelBuilder.Entity("Naomi.promotion_service.Models.Entities.PromoRuleSite", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id")
+                        .HasColumnOrder(0);
+
+                    b.Property<bool>("ActiveFlag")
+                        .HasColumnType("boolean")
+                        .HasColumnName("active_flag")
+                        .HasColumnOrder(8);
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("code")
+                        .HasColumnOrder(2);
+
+                    b.Property<string>("CreatedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("created_by")
+                        .HasColumnOrder(5);
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created_date")
+                        .HasColumnOrder(4);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("name")
+                        .HasColumnOrder(3);
+
+                    b.Property<Guid?>("PromoRuleId")
+                        .HasMaxLength(50)
+                        .HasColumnType("uuid")
+                        .HasColumnName("promo_rule_id")
+                        .HasColumnOrder(1);
+
+                    b.Property<string>("UpdatedBy")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
+                        .HasColumnName("updated_by")
+                        .HasColumnOrder(7);
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated_date")
+                        .HasColumnOrder(6);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PromoRuleId");
+
+                    b.ToTable("promo_rule_site");
                 });
 
             modelBuilder.Entity("Naomi.promotion_service.Models.Entities.PromoRuleVariable", b =>
@@ -1288,7 +1350,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(7);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(6);
 
@@ -1322,7 +1384,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(9);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(8);
 
@@ -1365,12 +1427,12 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(6);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(5);
 
                     b.Property<DateTime?>("TransDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("trans_date")
                         .HasColumnOrder(3);
 
@@ -1388,7 +1450,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(8);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(7);
 
@@ -1417,7 +1479,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(14);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(13);
 
@@ -1490,7 +1552,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(16);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(15);
 
@@ -1534,7 +1596,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(4);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(3);
 
@@ -1551,7 +1613,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(6);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(5);
 
@@ -1586,7 +1648,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(6);
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date")
                         .HasColumnOrder(5);
 
@@ -1613,7 +1675,7 @@ namespace Naomi.promotion_service.Migrations
                         .HasColumnOrder(8);
 
                     b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("timestamp without time zone")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date")
                         .HasColumnOrder(7);
 
@@ -1648,7 +1710,7 @@ namespace Naomi.promotion_service.Migrations
             modelBuilder.Entity("Naomi.promotion_service.Models.Entities.PromoRuleMembership", b =>
                 {
                     b.HasOne("Naomi.promotion_service.Models.Entities.PromoRule", null)
-                        .WithMany("PromoRuleMemberships")
+                        .WithMany("PromoRuleMembership")
                         .HasForeignKey("PromoRuleId");
                 });
 
@@ -1663,6 +1725,13 @@ namespace Naomi.promotion_service.Migrations
                 {
                     b.HasOne("Naomi.promotion_service.Models.Entities.PromoRule", null)
                         .WithMany("PromoRuleResult")
+                        .HasForeignKey("PromoRuleId");
+                });
+
+            modelBuilder.Entity("Naomi.promotion_service.Models.Entities.PromoRuleSite", b =>
+                {
+                    b.HasOne("Naomi.promotion_service.Models.Entities.PromoRule", null)
+                        .WithMany("PromoRuleSite")
                         .HasForeignKey("PromoRuleId");
                 });
 
@@ -1693,11 +1762,13 @@ namespace Naomi.promotion_service.Migrations
 
                     b.Navigation("PromoRuleExpression");
 
-                    b.Navigation("PromoRuleMemberships");
+                    b.Navigation("PromoRuleMembership");
 
                     b.Navigation("PromoRuleMop");
 
                     b.Navigation("PromoRuleResult");
+
+                    b.Navigation("PromoRuleSite");
 
                     b.Navigation("PromoRuleVariable");
                 });

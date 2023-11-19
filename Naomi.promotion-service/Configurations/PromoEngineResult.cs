@@ -28,13 +28,13 @@ namespace Naomi.promotion_service.Configurations
         public static async Task<ResultPromoDto> CalculatePromoSingle(PromoRule dataPromo, ParamsPromoDto dataCart)
         {
             int linePromoCount = 1;
-            List<PromoListItem> responseDetail = new(); //Variable untuk save data detail item semua group
+            List<PromoListItemDto> responseDetail = new(); //Variable untuk save data detail item semua group
 
             //Execute Promo Untuk Semua Item
             if (dataPromo.ItemType == "ALL")
             {
 
-                List<PromoListItemDetail> responseDetailGroup = new();
+                List<PromoListItemDetailDto> responseDetailGroup = new();
 
                 // Looping Item di Cart untuk Execute Promo
                 foreach (var loopItemCart in dataCart.ItemProduct!)
@@ -73,7 +73,7 @@ namespace Naomi.promotion_service.Configurations
                         discountTypeAll = Convert.ToDecimal(loopItemCart.Qty) * loopItemCart.Price * Convert.ToDecimal(dataPromo.PromoActionValue!.Replace("%", "")) / 100;
                     }
 
-                    PromoListItemDetail ResponseDetailGroupSingle = new()
+                    PromoListItemDetailDto ResponseDetailGroupSingle = new()
                     {
                         LineNo = loopItemCart.LineNo,
                         SkuCode = loopItemCart.SkuCode,
@@ -97,7 +97,7 @@ namespace Naomi.promotion_service.Configurations
                 decimal? total_discountAllItem = responseDetailGroup.Sum(q => q.TotalDiscount) + Convert.ToDecimal(roundingAllItem);
                 decimal? total_afterAllItem = total_beforeAllItem - total_discountAllItem;
 
-                PromoListItem responseDetailSingle = new()
+                PromoListItemDto responseDetailSingle = new()
                 {
                     LinePromo = linePromoCount,
                     Rounding = roundingAllItem,
@@ -114,7 +114,7 @@ namespace Naomi.promotion_service.Configurations
             {
 
                 //Grouping item bedasarkan group di db ms_promo_rule_result
-                List<List<ItemGroupResultPerPromo>> listItemPerPromo = new(); //Variable untuk menampung item custom group
+                List<List<ItemGroupResultPerPromoDto>> listItemPerPromo = new(); //Variable untuk menampung item custom group
                 var groupList = dataPromo.PromoRuleResult!.Select(q => q.GroupLine).Distinct().ToList(); //get data disctinc group
 
                 //Get Data Qty Total Bundle
@@ -137,13 +137,13 @@ namespace Naomi.promotion_service.Configurations
                 //Looping group untuk mendapatkan item
                 foreach (var loopGroup in groupList)
                 {
-                    List<ItemGroupResultPerPromo> listItemPerGroup = new(); //Varibel untuk menampung item di 1 group
+                    List<ItemGroupResultPerPromoDto> listItemPerGroup = new(); //Varibel untuk menampung item di 1 group
                     var listItemGroup = dataPromo.PromoRuleResult!.Where(q => q.GroupLine == loopGroup).ToList(); //get data item sesuai looping group
 
                     foreach (var loopItemGroup in listItemGroup)
                     {
                         //Input data item ke list dalam 1 group
-                        ItemGroupResultPerPromo ItemPerPromo = new()
+                        ItemGroupResultPerPromoDto ItemPerPromo = new()
                         {
                             SkuCode = loopItemGroup.Item,
                             Value = loopItemGroup.DscValue,
@@ -160,7 +160,7 @@ namespace Naomi.promotion_service.Configurations
                 foreach (var loopItemperPromo in listItemPerPromo)
                 {
 
-                    List<PromoListItemDetail> responseDetailGroup = new(); //Model for save hasil promo item per group
+                    List<PromoListItemDetailDto> responseDetailGroup = new(); //Model for save hasil promo item per group
 
                     decimal discountTypeCustom = 0;
                     List<string> dataListItem = new();
@@ -188,7 +188,7 @@ namespace Naomi.promotion_service.Configurations
                     {
                         foreach (var loopItemPerGroup in loopItemperPromo)
                         {
-                            PromoListItemDetail responseDetailGroupSingle = new();
+                            PromoListItemDetailDto responseDetailGroupSingle = new();
                             var dataItemCart = dataCart.ItemProduct!.Find(q => q.SkuCode == loopItemPerGroup.SkuCode); //Get data di cart
 
                             if (dataItemCart != null)
@@ -272,7 +272,7 @@ namespace Naomi.promotion_service.Configurations
                         decimal? total_discountAllItem = responseDetailGroup.Sum(q => q.TotalDiscount) + Convert.ToDecimal(roundingAllItem);
                         decimal? total_afterAllItem = total_beforeAllItem - total_discountAllItem;
 
-                        PromoListItem responseDetailSingle = new()
+                        PromoListItemDto responseDetailSingle = new()
                         {
                             LinePromo = linePromoCount,
                             Rounding = roundingAllItem,
@@ -315,11 +315,11 @@ namespace Naomi.promotion_service.Configurations
             //Save Data Require MOP
             if (dataPromo.Cls == 3 && dataPromo.PromoRuleMop != null && dataPromo.PromoRuleMop.Count > 0)
             {
-                List<PromoMopRequireDetail> listPromoMopRequireDetail = new();
+                List<PromoMopRequireDetailDto> listPromoMopRequireDetail = new();
 
                 foreach (var loopReqMop in dataPromo.PromoRuleMop!)
                 {
-                    PromoMopRequireDetail promoMopRequireDetail = new()
+                    PromoMopRequireDetailDto promoMopRequireDetail = new()
                     {
                         MopGroupCode = loopReqMop.MopGroupCode,
                         MopGroupName = loopReqMop.MopGroupName
@@ -328,7 +328,7 @@ namespace Naomi.promotion_service.Configurations
                     listPromoMopRequireDetail.Add(promoMopRequireDetail);
                 }
 
-                PromoMopRequire? promoMopRequire = new()
+                PromoMopRequireDto? promoMopRequire = new()
                 {
                     MopPromoSelectionCode = dataPromo.PromoRuleMop!.FirstOrDefault()!.MopPromoSelectionCode,
                     MopPromoSelectionName = dataPromo.PromoRuleMop!.FirstOrDefault()!.MopPromoSelectionName,

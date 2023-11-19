@@ -67,6 +67,9 @@ namespace Naomi.promotion_service.Services.FindPromoService
 
                 if (promoTransBeforeCommited is not null)
                 {
+                    if(promoTransBeforeCommited.Commited)
+                        return (new List<FindPromoResponse>(), $"Transaction id {findPromoRequest.TransId} already commited", false);
+
                     (bool cekRollBack, string messageRollBack) = await _softBookingService.PromoRollBackBeforeCommit(promoWorkflow, promoTransBeforeCommited);
 
                     if (!cekRollBack)
@@ -110,7 +113,7 @@ namespace Naomi.promotion_service.Services.FindPromoService
                 if (listPromoResult is null || listPromoResult.Count < 1)
                     return (new List<FindPromoResponse>(), "No Have Promo for This Cart", true);
 
-                List<ResultPromoDto> listResultPromoDtos = _mapper.Map<List<ResultPromoDto>>(listPromoResult);
+                List<ResultPromoDto> listResultPromoDtos = _mapper.Map<List<ResultPromoDto>>(listPromoResult.Select(q => q.ActionResult.Output));
 
                 #endregion
 
@@ -153,15 +156,130 @@ namespace Naomi.promotion_service.Services.FindPromoService
 
                 #endregion
 
-                List<FindPromoResponse> listFindPromoResponses = _mapper.Map<List<FindPromoResponse>>(listResultPromoDtos);
+                #region "Mapping Data Response and Execute Db"
 
+                List<FindPromoResponse> listFindPromoResponses = _mapper.Map<List<FindPromoResponse>>(listResultPromoDtos);
                 await _dataDbContext.SaveChangesAsync();
+
+                #endregion
 
                 return (listFindPromoResponses, "SUCCESS", true);
             }
             catch (Exception ex)
             {
                 return (new List<FindPromoResponse>(), ex.Message, false);
+            }
+        }
+
+        public async Task<(List<ResultFindPromoWithoutEngineDto>?, string, bool)> FindPromoWithoutEngine(ParamsFindPromoWithoutEngineDto findPromoWithoutEngineRequest, bool promoShow)
+        {
+            try
+            {
+                #region "Cek Company and get data from Promo Workflow"
+
+                //Get Company Workflow Id 
+                PromoWorkflow? promoWorkflow = await _dataDbContext.PromoWorkflow
+                    .FirstOrDefaultAsync(q => q.Code!.ToUpper() == findPromoWithoutEngineRequest.CompanyCode!.ToUpper() && q.ActiveFlag);
+
+                //Check Company Workflow Data
+                if (promoWorkflow is null)
+                    return (null, $"Company {findPromoWithoutEngineRequest.CompanyCode} not Registered on Table PromoWorkflow !!", false);
+
+                #endregion
+
+                #region "Get Data Promo Detail"
+
+                //Get Data Promo Rule
+                List<PromoRule>? listPromoRule;
+
+                if (!promoShow && !string.IsNullOrEmpty(findPromoWithoutEngineRequest.RedeemCode))
+                {
+                   listPromoRule = await _dataDbContext.PromoRule
+                    .Include(q => q.PromoRuleResult)
+                    .Include(q => q.PromoRuleApps!.Where(q => q.Code == findPromoWithoutEngineRequest.PromotionApp))
+                    .Where(q => q.PromoWorkflowId == promoWorkflow.Id && q.RedeemCode == findPromoWithoutEngineRequest.RedeemCode && q.RefCode == null && q.Cls != 4
+                            && q.StartDate <= DateTime.UtcNow && q.EndDate >= DateTime.UtcNow && q.PromoRuleApps != null && q.PromoRuleApps.Count > 0
+                            && q.PromoRuleSite != null && q.PromoRuleSite.Count > 0)
+                    .ToListAsync();
+                }
+                else if (promoShow && !string.IsNullOrEmpty(findPromoWithoutEngineRequest.SiteCode))
+                {
+                    //Get Data Promo Rule Show All
+                    listPromoRule = await _dataDbContext.PromoRule
+                        .Include(q => q.PromoRuleResult)
+                        .Include(q => q.PromoRuleApps!.Where(q => q.Code!.ToUpper() == findPromoWithoutEngineRequest.PromotionApp!.ToUpper()))
+                        .Include(q => q.PromoRuleSite!.Where(q => q.Code!.ToUpper() == findPromoWithoutEngineRequest.SiteCode!.ToUpper()))
+                        .Where(q => q.PromoWorkflowId == promoWorkflow.Id && q.PromoShow && q.RefCode == null && q.Cls != 4
+                                && q.StartDate <= DateTime.UtcNow && q.EndDate >= DateTime.UtcNow && q.PromoRuleApps != null
+                                && q.PromoRuleApps.Count > 0 && q.PromoRuleSite != null && q.PromoRuleSite.Count > 0)
+                        .ToListAsync();
+                }
+                else if (promoShow && string.IsNullOrEmpty(findPromoWithoutEngineRequest.SiteCode))
+                {
+                    //Get Data Promo Rule Show All
+                    listPromoRule = await _dataDbContext.PromoRule
+                        .Include(q => q.PromoRuleResult)
+                        .Include(q => q.PromoRuleApps!.Where(q => q.Code == findPromoWithoutEngineRequest.PromotionApp))
+                        .Where(q => q.PromoWorkflowId == promoWorkflow.Id && q.PromoShow && q.RefCode == null && q.Cls != 4
+                                && q.StartDate <= DateTime.UtcNow && q.EndDate >= DateTime.UtcNow && q.PromoRuleApps != null
+                                && q.PromoRuleApps.Count > 0)
+                        .ToListAsync();
+                } else
+                {
+                    listPromoRule = new();
+                }
+
+                //Cek Promo Rule
+                if (listPromoRule is null || listPromoRule.Count < 1)
+                    return (null, "No Have Promo Detail at Table PromoRule with this Params !!", true);
+
+                #endregion
+
+                #region "Cek Quota Promo"
+
+                List<string> listPromoNew = new();
+                //Get list promo code with quota
+                var listPromoQuota = listPromoRule.Where(q => q.MaxUse > 0).Select(q => q.Code).ToList();
+                //Get list promo code without quota
+                var listPromoNonQuota = listPromoRule.Where(q => q.MaxUse < 1 || q.MaxUse is null).Select(q => q.Code).ToList();
+
+                //Add list promo code non quota to list promo new 
+                if (listPromoNonQuota is not null && listPromoNonQuota.Count > 0)
+                    listPromoNew.AddRange(listPromoNonQuota!);
+
+                if (listPromoQuota is not null && listPromoQuota.Count > 0)
+                {
+                    //Cek quota di promo master
+                    List<string?>? listPromoQuotaResult = await _dataDbContext.PromoMaster
+                        .Where(q => listPromoQuota.Contains(q.PromoCode!) && q.QtyBook + 1 > q.Qty && q.ActiveFlag)
+                        .Select(q => q.PromoCode)
+                        .ToListAsync();
+
+                    //Add list promo code quota to list promo new
+                    if (listPromoQuotaResult != null && listPromoQuotaResult.Count > 0)
+                        listPromoNew.AddRange(listPromoQuotaResult!);
+                }
+
+                //Filter Promo Rule with promo new
+                listPromoRule = listPromoRule.Where(q => listPromoNew.Contains(q.Code!)).ToList();
+
+                if (listPromoRule is null || listPromoRule.Count < 1)
+                    return (null, "No Have Promo Detail at Table PromoRule with this Params !!", true);
+
+                #endregion
+
+                #region "Mapping Data Promo for Response"
+
+                List<ResultFindPromoWithoutEngineDto> resultFindPromoWithoutEngineDto = _mapper.Map<List<ResultFindPromoWithoutEngineDto>>(listPromoRule);
+                resultFindPromoWithoutEngineDto.ForEach(q => q.CompanyCode = promoWorkflow.Code!.ToUpper());
+
+                #endregion
+
+                return (resultFindPromoWithoutEngineDto, "SUCCESS", true);
+            }
+            catch (Exception ex)
+            {
+                return (new List<ResultFindPromoWithoutEngineDto>(), ex.Message, false);
             }
         }
     }

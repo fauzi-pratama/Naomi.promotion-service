@@ -13,14 +13,7 @@ namespace Naomi.promotion_service.Models.Validation
             RuleFor(x => x.TransId)
                 .NotEmpty()
                 .NotNull()
-                .MustAsync(async (TransId, cancellation) =>
-                {
-                    bool isCheckTransactionCommited = 
-                        await dataDbContext.PromoTrans.AnyAsync(q => q.TransId!.ToUpper() == TransId!.ToUpper() && q.ActiveFlag, cancellationToken: cancellation);
-
-                    return !isCheckTransactionCommited;
-                })
-                .WithMessage("TransId is null or already commited !!");
+                .WithMessage("TransId is null !!");
 
             RuleFor(x => x.SiteCode)
                 .NotEmpty()
@@ -30,7 +23,7 @@ namespace Naomi.promotion_service.Models.Validation
             RuleFor(x => x.CompanyCode)
                 .NotEmpty()
                 .NotNull()
-                .WithMessage("CompanyCode is null or not registered on table promo_workflow !!");
+                .WithMessage("CompanyCode is null !!");
 
             RuleFor(x => x.TransDate)
                 .NotEmpty()

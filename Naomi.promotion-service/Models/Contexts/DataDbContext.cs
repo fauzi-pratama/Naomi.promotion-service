@@ -8,6 +8,7 @@ namespace Naomi.promotion_service.Models.Contexts
     {
         public DataDbContext(DbContextOptions<DataDbContext> options) : base(options)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
 
         public DbSet<PromoWorkflow> PromoWorkflow { get; set; }
@@ -41,9 +42,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 1,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterClass()
                 {
@@ -53,9 +54,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 2,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterClass()
                 {
@@ -65,9 +66,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 3,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterClass()
                 {
@@ -77,9 +78,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 4,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 }
             );
 
@@ -93,9 +94,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 1,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterType()
                 {
@@ -106,9 +107,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 1,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterType()
                 {
@@ -119,9 +120,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 2,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterType()
                 {
@@ -132,9 +133,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 2,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterType()
                 {
@@ -145,9 +146,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 2,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterType()
                 {
@@ -158,9 +159,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 2,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterType()
                 {
@@ -171,9 +172,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 2,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterType()
                 {
@@ -184,9 +185,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 2,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterType()
                 {
@@ -197,9 +198,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 2,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 },
                 new PromoMasterType()
                 {
@@ -210,9 +211,9 @@ namespace Naomi.promotion_service.Models.Contexts
                     LineNum = 2,
                     ActiveFlag = true,
                     CreatedBy = "System",
-                    CreatedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
                     UpdatedBy = "System",
-                    UpdatedDate = DateTime.Now
+                    UpdatedDate = DateTime.UtcNow
                 }
             );
         }

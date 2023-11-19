@@ -1,6 +1,4 @@
 ﻿
-using Naomi.promotion_service.Models.Dto;
-
 namespace Naomi.promotion_service.Models.Request
 {
     public class FindPromoRequest
@@ -10,7 +8,7 @@ namespace Naomi.promotion_service.Models.Request
         public string? CompanyCode { get; set; }
         public string? SiteCode { get; set; }
         public string? ZoneCode { get; set; }
-        public bool EntertaimentStatus { get; set; } = false;
+        public bool EntertaimentStatus { get; set; } 
         public string? EntertaimentNip { get; set; }
         public string? EntertaimentOtp { get; set; }
         public string? PromoAppCode { get; set; }

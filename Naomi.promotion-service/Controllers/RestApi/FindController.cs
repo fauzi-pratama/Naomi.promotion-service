@@ -1,5 +1,7 @@
 ﻿
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Naomi.promotion_service.Models.Dto;
 using Naomi.promotion_service.Models.Request;
 using Naomi.promotion_service.Models.Response;
 using Naomi.promotion_service.Services.FindPromoService;
@@ -12,11 +14,13 @@ namespace Naomi.promotion_service.Controllers.RestApi
     {
         private readonly ILogger<FindController> _logger;
         private readonly IFindPromoService _findPromoService;
+        private readonly IMapper _mapper;
 
-        public FindController(ILogger<FindController> logger, IFindPromoService findPromoService)
+        public FindController(ILogger<FindController> logger, IFindPromoService findPromoService, IMapper mapper)
         {
             _logger = logger;
             _findPromoService = findPromoService;
+            _mapper = mapper;
         }
 
         [HttpPost("find_promo")]
@@ -40,5 +44,52 @@ namespace Naomi.promotion_service.Controllers.RestApi
                 return NotFound(serviceResponse);
             }
         }
+
+        [HttpPost("find_promo_show")]
+        public async Task<ActionResult<ServiceResponse<List<FindPromoShowResponse>>>> FindPromoShow([FromBody] FindPromoShowRequest findPromoShowRequest)
+        {
+            ParamsFindPromoWithoutEngineDto paramsFindPromoWithoutEngineDto = _mapper.Map<ParamsFindPromoWithoutEngineDto>(findPromoShowRequest);
+            (List<ResultFindPromoWithoutEngineDto> ? data, string message, bool cek) = await _findPromoService.FindPromoWithoutEngine(paramsFindPromoWithoutEngineDto, true);
+
+            ServiceResponse<List<FindPromoShowResponse>> serviceResponse = new()
+            {
+                Data = message == "SUCCESS" ? _mapper.Map<List<FindPromoShowResponse>>(data) : new List<FindPromoShowResponse>(),
+                Success = message == "SUCCESS",
+                Message = message
+            };
+
+            if (cek)
+                return Ok(serviceResponse);
+            else
+            {
+                _logger.LogError(message);
+
+                return NotFound(serviceResponse);
+            }
+        }
+
+        [HttpPost("find_promo_redeem")]
+        public async Task<ActionResult<ServiceResponse<List<FindPromoRedeemResponse>>>> FindPromoRedeem([FromBody] FindPromoRedeemRequest findPromoRedeemRequest)
+        {
+            ParamsFindPromoWithoutEngineDto paramsFindPromoWithoutEngineDto = _mapper.Map<ParamsFindPromoWithoutEngineDto>(findPromoRedeemRequest);
+            (List<ResultFindPromoWithoutEngineDto>? data, string message, bool cek) = await _findPromoService.FindPromoWithoutEngine(paramsFindPromoWithoutEngineDto, false);
+
+            ServiceResponse<List<FindPromoRedeemResponse>> serviceResponse = new()
+            {
+                Data = message == "SUCCESS" ? _mapper.Map<List<FindPromoRedeemResponse>>(data) : new List<FindPromoRedeemResponse>(),
+                Success = message == "SUCCESS",
+                Message = message
+            };
+
+            if (cek)
+                return Ok(serviceResponse);
+            else
+            {
+                _logger.LogError(message);
+
+                return NotFound(serviceResponse);
+            }
+        }
+
     }
 }

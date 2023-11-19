@@ -115,6 +115,7 @@ namespace Naomi.promotion_service.Models.Entities
         public List<PromoRuleExpression>? PromoRuleExpression { get; set; }
         public List<PromoRuleResult>? PromoRuleResult { get; set; }
         public List<PromoRuleApps>? PromoRuleApps { get; set; }
-        public List<PromoRuleMembership>? PromoRuleMemberships { get; set; }
+        public List<PromoRuleMembership>? PromoRuleMembership { get; set; }
+        public List<PromoRuleSite>? PromoRuleSite { get; set; }
     }
 }

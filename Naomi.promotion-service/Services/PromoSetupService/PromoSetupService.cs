@@ -1,7 +1,6 @@
 ﻿
-using Naomi.promotion_service.Configurations;
-using RulesEngine.Actions;
 using RulesEngine.Models;
+using Naomi.promotion_service.Configurations;
 
 namespace Naomi.promotion_service.Services.PromoSetupService
 {
@@ -9,18 +8,26 @@ namespace Naomi.promotion_service.Services.PromoSetupService
     {
         private RulesEngine.RulesEngine? _rulesEngine;
 
-        public bool RefreshWorkflow(string[] workflowRules)
+        public (bool, string) RefreshWorkflow(string[] workflowRules)
         {
-            var reSettings = new ReSettings
+            try
             {
-                CustomActions = new Dictionary<string, Func<ActionBase>>{
-                                          {"ResultPromo", () => new PromoEngineResult()}
-                                      }
-            };
+                ReSettings reSettings = new()
+                {
+                    CustomActions = new()
+                {
+                    {"ResultPromo", () => new PromoEngineResult()}
+                }
+                };
 
-            _rulesEngine = new RulesEngine.RulesEngine(workflowRules, reSettings);
+                _rulesEngine = new RulesEngine.RulesEngine(workflowRules, reSettings);
 
-            return true;
+                return (true, "Success");
+            }
+            catch (Exception ex)
+            {
+                return (false, ex.Message);
+            }
         }
 
         public async Task<List<RuleResultTree>> GetPromo(string workflowPromo, object findDataPromo, bool getDetail = false)
