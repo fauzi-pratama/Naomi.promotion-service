@@ -17,17 +17,17 @@ namespace Naomi.promotion_service.Services.WorkflowPromoService
             _dbContext = dbContext;
         }
 
-        public async Task<string[]> GetWorkflow()
+        public string[] GetWorkflow()
         {
             List<string> promoWorkflowList = new();
 
             ICollection<PromoWorkflow> listPromoWorkflow;
 
             //Get Data from Db
-            listPromoWorkflow = await _dbContext.PromoWorkflow
+            listPromoWorkflow = _dbContext.PromoWorkflow
                 .Where(q => q.ActiveFlag)
                 .Include(q => q.PromoWorkflowExpression)
-                .ToListAsync();
+                .ToList();
 
             //Return Out Jika Tidak Terdapat Promo Workflow
             if (listPromoWorkflow.Count < 1)

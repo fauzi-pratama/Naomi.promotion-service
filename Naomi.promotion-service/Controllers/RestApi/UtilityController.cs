@@ -29,7 +29,7 @@ namespace Naomi.promotion_service.Controllers.RestApi
             _dataDbContext.PromoMasterZone.RemoveRange(_dataDbContext.PromoMasterZone);
             _dataDbContext.PromoMasterSite.RemoveRange(_dataDbContext.PromoMasterSite);
 
-            _dataDbContext.SaveChanges();
+            await _dataDbContext.SaveChangesAsync();
 
             DbTesting dbTesting = new();
 
@@ -39,7 +39,7 @@ namespace Naomi.promotion_service.Controllers.RestApi
 
             _dataDbContext.SaveChanges();
 
-            _promoSetupService.RefreshWorkflow(await _workflowService.GetWorkflow());
+            _promoSetupService.RefreshWorkflow(_workflowService.GetWorkflow());
 
             return Ok();
         }

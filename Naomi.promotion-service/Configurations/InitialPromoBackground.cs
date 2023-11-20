@@ -22,7 +22,7 @@ namespace Naomi.promotion_service.Configurations
             IWorkflowService setupPromoWorkflow = asyncScope.ServiceProvider.GetRequiredService<IWorkflowService>();
             IPromoSetupService setupPromoService = asyncScope.ServiceProvider.GetRequiredService<IPromoSetupService>();
 
-            string[] dataPromoWorkflow = await setupPromoWorkflow.GetWorkflow();
+            string[] dataPromoWorkflow = setupPromoWorkflow.GetWorkflow();
             (bool cekSetupPromo, string messageSetupPromo ) = setupPromoService.RefreshWorkflow(dataPromoWorkflow);
 
             if (cekSetupPromo)
