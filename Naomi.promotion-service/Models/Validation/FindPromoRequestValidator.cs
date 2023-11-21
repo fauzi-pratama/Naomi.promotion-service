@@ -7,7 +7,7 @@ namespace Naomi.promotion_service.Models.Validation
 {
     public class FindPromoRequestValidator : AbstractValidator<FindPromoRequest>
     {
-        public FindPromoRequestValidator(DataDbContext dataDbContext)
+        public FindPromoRequestValidator()
         {
             RuleFor(x => x.TransId)
                 .NotEmpty()

@@ -19,7 +19,7 @@ namespace Naomi.promotion_test
 {
     public class UsePromoTest
     {
-        private IMapper _mapper;
+        private readonly IMapper _mapper;
         private readonly PromoSetupService _promoSetupService;
         private static DataDbContext? _dbContext;
 

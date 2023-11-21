@@ -12,6 +12,7 @@ using Naomi.promotion_service.Services.FindPromoService;
 using Naomi.promotion_service.Services.PromoSetupService;
 using Naomi.promotion_service.Services.SoftBookingService;
 using Naomi.promotion_service.Services.WorkflowPromoService;
+using Naomi.promotion_service.Services.EngineService;
 
 //Config App
 var builder = WebApplication.CreateBuilder(args);
@@ -53,6 +54,7 @@ builder.Services.AddScoped<ISAPService, SAPService>();
 builder.Services.AddScoped<IWorkflowService, WorkflowService>();
 builder.Services.AddScoped<IFindPromoService, FindPromoService>();
 builder.Services.AddScoped<ISoftBookingService, SoftBookingService>();
+builder.Services.AddScoped<IEngineService, EngineService>();
 builder.Services.AddSingleton<IPromoSetupService, PromoSetupService>();
 
 //Background Service Setup Promo Workflow
