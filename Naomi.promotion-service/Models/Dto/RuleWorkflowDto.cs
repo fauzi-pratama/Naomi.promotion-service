@@ -1,5 +1,5 @@
-﻿using Naomi.promotion_service.Models.Entities;
-using RulesEngine.Models;
+﻿
+using Naomi.promotion_service.Models.Entities;
 
 namespace Naomi.promotion_service.Models.Dto
 {

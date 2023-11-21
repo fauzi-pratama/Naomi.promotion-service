@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 
 namespace Naomi.promotion_service.Models.Message.Consume
 {

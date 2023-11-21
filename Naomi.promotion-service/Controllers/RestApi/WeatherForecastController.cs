@@ -1,6 +1,6 @@
+
 using DotNetCore.CAP;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace Naomi.promotion_service.Controllers.RestApi;
 

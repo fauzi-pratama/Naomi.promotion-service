@@ -1,9 +1,9 @@
 ﻿
+using Newtonsoft.Json;
+using RulesEngine.Models;
+using RulesEngine.Actions;
 using Naomi.promotion_service.Models.Dto;
 using Naomi.promotion_service.Models.Entities;
-using Newtonsoft.Json;
-using RulesEngine.Actions;
-using RulesEngine.Models;
 
 namespace Naomi.promotion_service.Configurations
 {

@@ -1,4 +1,5 @@
-﻿using Naomi.promotion_service.Models.Entities;
+﻿
+using Naomi.promotion_service.Models.Entities;
 
 namespace Naomi.promotion_service.Models.Testing
 {

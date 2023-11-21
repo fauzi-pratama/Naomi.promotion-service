@@ -6,9 +6,9 @@ using Naomi.promotion_service.Models.Request;
 using Naomi.promotion_service.Models.Response;
 using Naomi.promotion_service.Services.FindPromoService;
 
-namespace Naomi.promotion_service.Controllers.RestApi
+namespace Naomi.promotion_service.Controllers.RestApi.v1
 {
-    [Route("/")]
+    [Route("/v1/")]
     [ApiController]
     public class FindController : ControllerBase
     {
@@ -49,7 +49,7 @@ namespace Naomi.promotion_service.Controllers.RestApi
         public async Task<ActionResult<ServiceResponse<List<FindPromoShowResponse>>>> FindPromoShow([FromBody] FindPromoShowRequest findPromoShowRequest)
         {
             ParamsFindPromoWithoutEngineDto paramsFindPromoWithoutEngineDto = _mapper.Map<ParamsFindPromoWithoutEngineDto>(findPromoShowRequest);
-            (List<ResultFindPromoWithoutEngineDto> ? data, string message, bool cek) = await _findPromoService.FindPromoWithoutEngine(paramsFindPromoWithoutEngineDto, true);
+            (List<ResultFindPromoWithoutEngineDto>? data, string message, bool cek) = await _findPromoService.FindPromoWithoutEngine(paramsFindPromoWithoutEngineDto, true);
 
             ServiceResponse<List<FindPromoShowResponse>> serviceResponse = new()
             {

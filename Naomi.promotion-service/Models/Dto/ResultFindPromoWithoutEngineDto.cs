@@ -1,4 +1,5 @@
-﻿namespace Naomi.promotion_service.Models.Dto
+﻿
+namespace Naomi.promotion_service.Models.Dto
 {
     public class ResultFindPromoWithoutEngineDto
     {

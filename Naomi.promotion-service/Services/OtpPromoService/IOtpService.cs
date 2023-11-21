@@ -1,4 +1,5 @@
-﻿namespace Naomi.promotion_service.Services.OtpPromoService
+﻿
+namespace Naomi.promotion_service.Services.OtpPromoService
 {
     public interface IOtpService
     {

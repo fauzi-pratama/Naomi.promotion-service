@@ -1,6 +1,5 @@
 ﻿
 using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using Naomi.promotion_service.Models.Contexts;
 using Naomi.promotion_service.Models.Request;
 

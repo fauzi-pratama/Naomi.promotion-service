@@ -1,4 +1,5 @@
-﻿namespace Naomi.promotion_service.Models.Request
+﻿
+namespace Naomi.promotion_service.Models.Request
 {
     public class FindPromoShowRequest
     {

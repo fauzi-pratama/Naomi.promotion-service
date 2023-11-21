@@ -5,9 +5,9 @@ using Naomi.promotion_service.Models.Testing;
 using Naomi.promotion_service.Services.PromoSetupService;
 using Naomi.promotion_service.Services.WorkflowPromoService;
 
-namespace Naomi.promotion_service.Controllers.RestApi
+namespace Naomi.promotion_service.Controllers.RestApi.v1
 {
-    [Route("/")]
+    [Route("/v1/")]
     [ApiController]
     public class UtilityController : ControllerBase
     {

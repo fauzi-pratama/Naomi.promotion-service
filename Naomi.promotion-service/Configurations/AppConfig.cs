@@ -1,4 +1,5 @@
-﻿namespace Naomi.promotion_service.Configurations
+﻿
+namespace Naomi.promotion_service.Configurations
 {
     public class AppConfig
     {
