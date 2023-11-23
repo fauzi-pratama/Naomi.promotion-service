@@ -39,7 +39,8 @@ namespace Naomi.promotion_service.Services.EngineService
 
                 foreach (var loopCompanyWorkflow in listCompanyWorkflowEngine)
                 {
-                    var listResultEngine = await _promoSetupService.GetPromo(loopCompanyWorkflow, findPromoRequest, true);
+                    (List<RulesEngine.Models.RuleResultTree> listResultEngine, string message, bool cek ) = 
+                        await _promoSetupService.GetPromo(loopCompanyWorkflow, findPromoRequest, true);
 
                     foreach (var loopResultEngine in listResultEngine)
                     {

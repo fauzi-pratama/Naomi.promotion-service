@@ -13,6 +13,7 @@ using Naomi.promotion_service.Services.PromoSetupService;
 using Naomi.promotion_service.Services.SoftBookingService;
 using Naomi.promotion_service.Services.WorkflowPromoService;
 using Naomi.promotion_service.Services.EngineService;
+using Naomi.promotion_service.Services.CommitService;
 
 //Config App
 var builder = WebApplication.CreateBuilder(args);
@@ -55,6 +56,7 @@ builder.Services.AddScoped<IWorkflowService, WorkflowService>();
 builder.Services.AddScoped<IFindPromoService, FindPromoService>();
 builder.Services.AddScoped<ISoftBookingService, SoftBookingService>();
 builder.Services.AddScoped<IEngineService, EngineService>();
+builder.Services.AddScoped<ICommitService, CommitService>();
 builder.Services.AddSingleton<IPromoSetupService, PromoSetupService>();
 
 //Background Service Setup Promo Workflow
@@ -64,7 +66,10 @@ builder.Services.AddHostedService<InitialPromoBackground>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 //Config Controller
-builder.Services.AddControllers().AddFluentValidation(v =>
+builder.Services.AddControllers(option =>
+{
+    option.Filters.Add(typeof(ValidateModelResponse));
+}).AddFluentValidation(v =>
 {
     v.ImplicitlyValidateChildProperties = true;
     v.ImplicitlyValidateRootCollectionElements = true;

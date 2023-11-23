@@ -30,15 +30,21 @@ namespace Naomi.promotion_service.Services.PromoSetupService
             }
         }
 
-        public async Task<List<RuleResultTree>> GetPromo(string workflowPromo, object findDataPromo, bool getDetail = false)
+        public async Task<(List<RuleResultTree> data, string, bool)> GetPromo(string workflowPromo, object findDataPromo, bool getDetail = false)
         {
-            RuleParameter paramsPromo = new("paramsPromo", findDataPromo);
-            List<RuleResultTree> resultList = await _rulesEngine!.ExecuteAllRulesAsync(workflowPromo, paramsPromo);
+            try
+            {
+                RuleParameter paramsPromo = new("paramsPromo", findDataPromo);
+                List<RuleResultTree> resultList = await _rulesEngine!.ExecuteAllRulesAsync(workflowPromo, paramsPromo);
 
-            if (!getDetail)
-                resultList = resultList.Where(q => q.IsSuccess).ToList();
+                if (!getDetail)
+                    resultList = resultList.Where(q => q.IsSuccess).ToList();
 
-            return resultList;
+                return (resultList, "SUCCESS", true);
+            } catch (Exception ex)
+            {
+                return (new List<RuleResultTree>(), ex.Message, false);
+            }
         }
 
         public List<string> GetCompanyWorkflow()

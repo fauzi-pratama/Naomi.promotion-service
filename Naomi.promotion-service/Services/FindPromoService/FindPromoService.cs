@@ -67,7 +67,7 @@ namespace Naomi.promotion_service.Services.FindPromoService
 
                 if (promoTransBeforeCommited is not null)
                 {
-                    if(promoTransBeforeCommited.Commited)
+                    if (promoTransBeforeCommited.Commited)
                         return (new List<FindPromoResponse>(), $"Transaction id {findPromoRequest.TransId} already commited", false);
 
                     (bool cekRollBack, string messageRollBack) = await _softBookingService.PromoRollBackBeforeCommit(promoWorkflow, promoTransBeforeCommited);
@@ -108,10 +108,16 @@ namespace Naomi.promotion_service.Services.FindPromoService
                 #region "Run Engine to Find Promo and Mapper to Result Promo"
 
                 //Call Engine untuk mendapatkan promo
-                List<RulesEngine.Models.RuleResultTree>? listPromoResult = await _promoSetupService.GetPromo(paramsPromoDto.CompanyCode!, paramsPromoDto);
+                (List<RulesEngine.Models.RuleResultTree>? listPromoResult, string messageGetPromo, bool cekGetPromo) =
+                    await _promoSetupService.GetPromo(paramsPromoDto.CompanyCode!, paramsPromoDto);
 
                 if (listPromoResult is null || listPromoResult.Count < 1)
-                    return (new List<FindPromoResponse>(), "No Have Promo for This Cart", true);
+                {
+                    if (cekGetPromo)
+                        return (new List<FindPromoResponse>(), $"No Have Promo for This Cart", true);
+                    else
+                        return (new List<FindPromoResponse>(), $"No Have Promo for This Cart, {messageGetPromo}", true);
+                }
 
                 List<ResultPromoDto> listResultPromoDtos = _mapper.Map<List<ResultPromoDto>>(listPromoResult.Select(q => q.ActionResult.Output));
 
@@ -194,13 +200,13 @@ namespace Naomi.promotion_service.Services.FindPromoService
 
                 if (!promoShow && !string.IsNullOrEmpty(findPromoWithoutEngineRequest.RedeemCode))
                 {
-                   listPromoRule = await _dataDbContext.PromoRule
-                    .Include(q => q.PromoRuleResult)
-                    .Include(q => q.PromoRuleApps!.Where(q => q.Code == findPromoWithoutEngineRequest.PromotionApp))
-                    .Where(q => q.PromoWorkflowId == promoWorkflow.Id && q.RedeemCode == findPromoWithoutEngineRequest.RedeemCode && q.RefCode == null && q.Cls != 4
-                            && q.StartDate <= DateTime.UtcNow && q.EndDate >= DateTime.UtcNow && q.PromoRuleApps != null && q.PromoRuleApps.Count > 0
-                            && q.PromoRuleSite != null && q.PromoRuleSite.Count > 0)
-                    .ToListAsync();
+                    listPromoRule = await _dataDbContext.PromoRule
+                     .Include(q => q.PromoRuleResult)
+                     .Include(q => q.PromoRuleApps!.Where(q => q.Code == findPromoWithoutEngineRequest.PromotionApp))
+                     .Where(q => q.PromoWorkflowId == promoWorkflow.Id && q.RedeemCode == findPromoWithoutEngineRequest.RedeemCode && q.RefCode == null && q.Cls != 4
+                             && q.StartDate <= DateTime.UtcNow && q.EndDate >= DateTime.UtcNow && q.PromoRuleApps != null && q.PromoRuleApps.Count > 0
+                             && q.PromoRuleSite != null && q.PromoRuleSite.Count > 0)
+                     .ToListAsync();
                 }
                 else if (promoShow && !string.IsNullOrEmpty(findPromoWithoutEngineRequest.SiteCode))
                 {
@@ -224,7 +230,8 @@ namespace Naomi.promotion_service.Services.FindPromoService
                                 && q.StartDate <= DateTime.UtcNow && q.EndDate >= DateTime.UtcNow && q.PromoRuleApps != null
                                 && q.PromoRuleApps.Count > 0)
                         .ToListAsync();
-                } else
+                }
+                else
                 {
                     listPromoRule = new();
                 }
