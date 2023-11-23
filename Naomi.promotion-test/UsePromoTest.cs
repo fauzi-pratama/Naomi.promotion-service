@@ -48,6 +48,18 @@ namespace Naomi.promotion_test
             return dataDbContext;
         }
 
+        private static AppConfig GetAppConfig()
+        {
+            return new()
+            {
+                PostgreSqlConnectionString = "-",
+                KafkaConnectionString = "-",
+                EmailDomain = "-",
+                EmailHost = "-",
+                EmailPort = 123
+            };
+        }
+
         private static PromoSetupService GetPromoSetupService()
         {
             WorkflowService workflowService = new(_dbContext!);
@@ -59,9 +71,9 @@ namespace Naomi.promotion_test
             return promoSetupService;
         }
 
-        private static async Task<Mock<IOtpService>> GetMockOtpService()
+        private static Mock<IOtpService> GetMockOtpService()
         {
-            OtpService otpService = new(_dbContext!);
+            OtpService otpService = new(_dbContext!, GetAppConfig());
             Mock<IOtpService> mockOtpService = new();
 
             return mockOtpService;
@@ -92,7 +104,7 @@ namespace Naomi.promotion_test
         private async Task<(List<FindPromoResponse>, string, bool)> FindPromoTest(FindPromoRequest findPromoRequest, List<PromoRuleCekAvailRequest> promoRuleCekAvailRequests)
         {
             FindPromoService findPromoService =
-                new(_dbContext!, _promoSetupService, GetMockOtpService().Result.Object,
+                new(_dbContext!, _promoSetupService, GetMockOtpService().Object,
                     GetMockSoftBookingService(promoRuleCekAvailRequests, findPromoRequest.CompanyCode!).Result.Object, _mapper);
 
             return await findPromoService.FindPromo(findPromoRequest);

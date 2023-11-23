@@ -49,8 +49,15 @@ namespace Naomi.promotion_service.Services.FindPromoService
                 //Cek otp promo sudah sesuai dengan yang di generate lewat email atau belum
                 if (findPromoRequest.EntertaimentStatus)
                 {
+                    ParamsConfirmOtpDto paramsConfirmOtpDto = new()
+                    {
+                        CompanyCode = findPromoRequest.CompanyCode,
+                        Nip = findPromoRequest.EntertaimentNip,
+                        Otp = findPromoRequest.EntertaimentOtp
+                    };
+
                     (bool cekOtp, string messageOtp) =
-                        await _otpService.ConfirmOtp(findPromoRequest.CompanyCode!, findPromoRequest.EntertaimentNip!, findPromoRequest.EntertaimentOtp!);
+                        await _otpService.ConfirmOtp(paramsConfirmOtpDto);
 
                     if (!cekOtp)
                         return (new List<FindPromoResponse>(), $"Failed cek Otp : {messageOtp}", false);
