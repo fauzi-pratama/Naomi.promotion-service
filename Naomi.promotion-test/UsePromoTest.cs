@@ -2,6 +2,7 @@
 using Moq;
 using AutoMapper;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using Naomi.promotion_service.Models.Dto;
 using Naomi.promotion_service.Models.Testing;
@@ -14,6 +15,7 @@ using Naomi.promotion_service.Services.FindPromoService;
 using Naomi.promotion_service.Services.PromoSetupService;
 using Naomi.promotion_service.Services.SoftBookingService;
 using Naomi.promotion_service.Services.WorkflowPromoService;
+using Naomi.promotion_service.Services.EmailService;
 
 namespace Naomi.promotion_test
 {
@@ -48,9 +50,9 @@ namespace Naomi.promotion_test
             return dataDbContext;
         }
 
-        private static AppConfig GetAppConfig()
+        private static IOptions<AppConfig> GetAppConfig()
         {
-            return new()
+            AppConfig appConfig = new()
             {
                 PostgreSqlConnectionString = "-",
                 KafkaConnectionString = "-",
@@ -58,6 +60,8 @@ namespace Naomi.promotion_test
                 EmailHost = "-",
                 EmailPort = 123
             };
+
+            return Options.Create(appConfig);
         }
 
         private static PromoSetupService GetPromoSetupService()
@@ -71,9 +75,17 @@ namespace Naomi.promotion_test
             return promoSetupService;
         }
 
+        private static Mock<IEmailService> GetMockEmailService()
+        {
+            IEmailService emailService = new EmailService(_dbContext!, GetAppConfig());
+            Mock<IEmailService> mockEmailService = new();
+
+            return mockEmailService;
+        }
+
         private static Mock<IOtpService> GetMockOtpService()
         {
-            OtpService otpService = new(_dbContext!, GetAppConfig());
+            OtpService otpService = new(_dbContext!, GetAppConfig(), GetMockEmailService().Object);
             Mock<IOtpService> mockOtpService = new();
 
             return mockOtpService;

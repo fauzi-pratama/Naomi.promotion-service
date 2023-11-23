@@ -1,13 +1,14 @@
 
 using System.Reflection;
 using FluentValidation.AspNetCore;
-using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using Swashbuckle.AspNetCore.Filters;
 using Naomi.promotion_service.Configurations;
 using Naomi.promotion_service.Models.Contexts;
 using Naomi.promotion_service.Services.SAPService;
+using Naomi.promotion_service.Services.EmailService;
 using Naomi.promotion_service.Services.EngineService;
 using Naomi.promotion_service.Services.CommitService;
 using Naomi.promotion_service.Services.OtpPromoService;
@@ -15,7 +16,6 @@ using Naomi.promotion_service.Services.FindPromoService;
 using Naomi.promotion_service.Services.PromoSetupService;
 using Naomi.promotion_service.Services.SoftBookingService;
 using Naomi.promotion_service.Services.WorkflowPromoService;
-using Naomi.promotion_service.Services.EmailService;
 
 //Config App
 var builder = WebApplication.CreateBuilder(args);
@@ -52,14 +52,14 @@ builder.Services.AddCap(x =>
 });
 
 //Dependency Injection
-builder.Services.AddScoped<IFindPromoService, FindPromoService>();
 builder.Services.AddScoped<IOtpService, OtpService>();
 builder.Services.AddScoped<ISAPService, SAPService>();
-builder.Services.AddScoped<IWorkflowService, WorkflowService>();
-builder.Services.AddScoped<ISoftBookingService, SoftBookingService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IEngineService, EngineService>();
 builder.Services.AddScoped<ICommitService, CommitService>();
-builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IWorkflowService, WorkflowService>();
+builder.Services.AddScoped<IFindPromoService, FindPromoService>();
+builder.Services.AddScoped<ISoftBookingService, SoftBookingService>();
 builder.Services.AddSingleton<IPromoSetupService, PromoSetupService>();
 
 //Background Service Setup Promo Workflow
