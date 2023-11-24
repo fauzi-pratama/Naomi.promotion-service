@@ -7,6 +7,6 @@ namespace Naomi.promotion_service.Services.EmailService
     public interface IEmailService
     {
         (bool, string) SendEmail(ParamsEmailDto paramsEmailDto);
-        Task<(bool, string)> SyncEmailUserPromo(EmailUserMessage request);
+        Task<(bool, string)> SyncEmailUserPromoAsync(EmailUserMessage request);
     }
 }

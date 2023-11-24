@@ -24,9 +24,9 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
         }
 
         [HttpPost("find_promo")]
-        public async Task<ActionResult<ServiceResponse<List<FindPromoResponse>>>> FindPromo([FromBody] FindPromoRequest findPromoRequest)
+        public async Task<ActionResult<ServiceResponse<List<FindPromoResponse>>>> FindPromoAsync([FromBody] FindPromoRequest findPromoRequest)
         {
-            (List<FindPromoResponse> data, string message, bool cek) = await _findPromoService.FindPromo(findPromoRequest);
+            (List<FindPromoResponse> data, string message, bool cek) = await _findPromoService.FindPromoAsync(findPromoRequest);
 
             ServiceResponse<List<FindPromoResponse>> serviceResponse = new()
             {
@@ -46,10 +46,10 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
         }
 
         [HttpPost("find_promo_show")]
-        public async Task<ActionResult<ServiceResponse<List<FindPromoShowResponse>>>> FindPromoShow([FromBody] FindPromoShowRequest findPromoShowRequest)
+        public async Task<ActionResult<ServiceResponse<List<FindPromoShowResponse>>>> FindPromoShowAsync([FromBody] FindPromoShowRequest findPromoShowRequest)
         {
             ParamsFindPromoWithoutEngineDto paramsFindPromoWithoutEngineDto = _mapper.Map<ParamsFindPromoWithoutEngineDto>(findPromoShowRequest);
-            (List<ResultFindPromoWithoutEngineDto>? data, string message, bool cek) = await _findPromoService.FindPromoWithoutEngine(paramsFindPromoWithoutEngineDto, true);
+            (List<ResultFindPromoWithoutEngineDto>? data, string message, bool cek) = await _findPromoService.FindPromoWithoutEngineAsync(paramsFindPromoWithoutEngineDto, true);
 
             ServiceResponse<List<FindPromoShowResponse>> serviceResponse = new()
             {
@@ -69,10 +69,10 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
         }
 
         [HttpPost("find_promo_redeem")]
-        public async Task<ActionResult<ServiceResponse<List<FindPromoRedeemResponse>>>> FindPromoRedeem([FromBody] FindPromoRedeemRequest findPromoRedeemRequest)
+        public async Task<ActionResult<ServiceResponse<List<FindPromoRedeemResponse>>>> FindPromoRedeemAsync([FromBody] FindPromoRedeemRequest findPromoRedeemRequest)
         {
             ParamsFindPromoWithoutEngineDto paramsFindPromoWithoutEngineDto = _mapper.Map<ParamsFindPromoWithoutEngineDto>(findPromoRedeemRequest);
-            (List<ResultFindPromoWithoutEngineDto>? data, string message, bool cek) = await _findPromoService.FindPromoWithoutEngine(paramsFindPromoWithoutEngineDto, false);
+            (List<ResultFindPromoWithoutEngineDto>? data, string message, bool cek) = await _findPromoService.FindPromoWithoutEngineAsync(paramsFindPromoWithoutEngineDto, false);
 
             ServiceResponse<List<FindPromoRedeemResponse>> serviceResponse = new()
             {

@@ -7,6 +7,6 @@ namespace Naomi.promotion_service.Services.PromoSetupService
     {
         (bool, string) RefreshWorkflow(string[] workflowRules);
         List<string> GetCompanyWorkflow();
-        Task<(List<RuleResultTree> data, string, bool)> GetPromo(string workflowPromo, object findDataPromo, bool getDetail = false);
+        Task<(List<RuleResultTree> data, string, bool)> GetPromoAsync(string workflowPromo, object findDataPromo, bool getDetail = false);
     }
 }

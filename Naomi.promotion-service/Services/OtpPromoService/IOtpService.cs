@@ -6,7 +6,7 @@ namespace Naomi.promotion_service.Services.OtpPromoService
 {
     public interface IOtpService
     {
-        Task<(bool, string)> GetOtp(PromoOtpRequest promoOtpRequest);
-        Task<(bool, string)> ConfirmOtp(ParamsConfirmOtpDto paramsConfirmOtpDto);
+        Task<(bool, string)> GetOtpAsync(PromoOtpRequest promoOtpRequest);
+        Task<(bool, string)> ConfirmOtpAsync(ParamsConfirmOtpDto paramsConfirmOtpDto);
     }
 }

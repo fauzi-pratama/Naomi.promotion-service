@@ -21,7 +21,7 @@ namespace Naomi.promotion_service.Services.EmailService
             _appConfig = appConfig;
         }
 
-        public async Task<(bool, string)> SyncEmailUserPromo(EmailUserMessage request)
+        public async Task<(bool, string)> SyncEmailUserPromoAsync(EmailUserMessage request)
         {
             if (request is null || request.Nip is null || request.Email is null)
                 return (false, "Params is not Valid !!");

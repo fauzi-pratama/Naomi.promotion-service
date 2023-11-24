@@ -23,7 +23,7 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
         }
 
         [HttpGet("reset_data")]
-        public async Task<IActionResult> ResetData()
+        public async Task<IActionResult> ResetDataAsync()
         {
             _dataDbContext.PromoWorkflow.RemoveRange(_dataDbContext.PromoWorkflow);
             _dataDbContext.PromoMasterZone.RemoveRange(_dataDbContext.PromoMasterZone);

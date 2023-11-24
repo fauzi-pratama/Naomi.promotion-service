@@ -4,7 +4,7 @@ namespace Naomi.promotion_service.Services.CommitService
 {
     public interface ICommitService 
     {
-        Task<(bool, string)> CommitPromo(CommitRequest commitRequest);
-        Task<(bool, string)> CancelPromo(CancelPromoRequest cancelPromoRequest, bool commited = false);
+        Task<(bool, string)> CommitPromoAsync(CommitRequest commitRequest);
+        Task<(bool, string)> CancelPromoAsync(CancelPromoRequest cancelPromoRequest, bool commited = false);
     }
 }

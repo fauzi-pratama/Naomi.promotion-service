@@ -20,9 +20,9 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
         }
 
         [HttpPost("get_data_engine_promo")]
-        public async Task<ActionResult<ServiceResponse<List<EnginePromoResponse>>>> GetDataEnginePromo(EnginePromoRequest enginePromoRequest)
+        public async Task<ActionResult<ServiceResponse<List<EnginePromoResponse>>>> GetDataEnginePromoAsync(EnginePromoRequest enginePromoRequest)
         {
-            (List<EnginePromoResponse> data, string message, bool cek) = await _engineService.GetDataEnginePromo(enginePromoRequest);
+            (List<EnginePromoResponse> data, string message, bool cek) = await _engineService.GetDataEnginePromoAsync(enginePromoRequest);
 
             ServiceResponse<List<EnginePromoResponse>> serviceResponse = new()
             {

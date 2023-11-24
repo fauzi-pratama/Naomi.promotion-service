@@ -20,7 +20,7 @@ namespace Naomi.promotion_service.Controllers.MessageHandler
 
         [NonAction]
         [CapSubscribe("site")]
-        public async Task HandleSiteMessage(ServiceMessage message)
+        public async Task HandleSiteMessageAsync(ServiceMessage message)
         {
             if (message == null || message.SyncData == null)
             {
@@ -33,9 +33,9 @@ namespace Naomi.promotion_service.Controllers.MessageHandler
             SiteMessage? dataCompanySite =
                 JsonConvert.DeserializeObject<SiteMessage>(JsonConvert.SerializeObject(data));
 
-            (bool cekStatusCompany, string messageStatusCompany) = await _sapService.HandleMessageCompany(dataCompanySite);
-            (bool cekStatusSite, string messageStatusSite) = await _sapService.HandleMessageSite(dataCompanySite);
-            (bool cekStatusZone, string messageStatusZone) = await _sapService.HandleMessageZone(dataCompanySite);
+            (bool cekStatusCompany, string messageStatusCompany) = await _sapService.HandleMessageCompanyAsync(dataCompanySite);
+            (bool cekStatusSite, string messageStatusSite) = await _sapService.HandleMessageSiteAsync(dataCompanySite);
+            (bool cekStatusZone, string messageStatusZone) = await _sapService.HandleMessageZoneAsync(dataCompanySite);
 
             if (!cekStatusCompany)
                 _logger.LogError($"Failed Consume Company {dataCompanySite.CompanyCode} : {messageStatusCompany} ");
@@ -55,7 +55,7 @@ namespace Naomi.promotion_service.Controllers.MessageHandler
 
         [NonAction]
         [CapSubscribe("mop")]
-        public async Task HandleMopMessage(ServiceMessage message)
+        public async Task HandleMopMessageAsync(ServiceMessage message)
         {
             if (message == null || message.SyncData == null)
             {
@@ -68,7 +68,7 @@ namespace Naomi.promotion_service.Controllers.MessageHandler
             MopMessage? dataMop =
                 JsonConvert.DeserializeObject<MopMessage>(JsonConvert.SerializeObject(data));
 
-            (bool cekStatusMop, string messageStatusMop) = await _sapService.HandleMessageMop(dataMop);
+            (bool cekStatusMop, string messageStatusMop) = await _sapService.HandleMessageMopAsync(dataMop);
 
             if (!cekStatusMop)
                 _logger.LogError($"Failed Consume Mop {dataMop.MopCode} : {messageStatusMop} ");

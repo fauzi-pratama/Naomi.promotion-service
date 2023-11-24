@@ -20,9 +20,9 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
         }
 
         [HttpPost("get_promo_otp")]
-        public async Task<ActionResult<ServiceResponse<string>>> GetPromoOtp(PromoOtpRequest promoOtpRequest)
+        public async Task<ActionResult<ServiceResponse<string>>> GetPromoOtpAsync(PromoOtpRequest promoOtpRequest)
         {
-            (bool cekGetOtp, string msgGetOtp) = await _otpService.GetOtp(promoOtpRequest);
+            (bool cekGetOtp, string msgGetOtp) = await _otpService.GetOtpAsync(promoOtpRequest);
 
             if (!cekGetOtp)
             {

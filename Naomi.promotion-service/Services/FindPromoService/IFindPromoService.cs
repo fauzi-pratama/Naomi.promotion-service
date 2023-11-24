@@ -7,7 +7,7 @@ namespace Naomi.promotion_service.Services.FindPromoService
 {
     public interface IFindPromoService
     {
-        Task<(List<FindPromoResponse>, string, bool)> FindPromo(FindPromoRequest findPromoRequest);
-        Task<(List<ResultFindPromoWithoutEngineDto>?, string, bool)> FindPromoWithoutEngine(ParamsFindPromoWithoutEngineDto findPromoWithoutEngineRequest, bool promoShow);
+        Task<(List<FindPromoResponse>, string, bool)> FindPromoAsync(FindPromoRequest findPromoRequest);
+        Task<(List<ResultFindPromoWithoutEngineDto>?, string, bool)> FindPromoWithoutEngineAsync(ParamsFindPromoWithoutEngineDto findPromoWithoutEngineRequest, bool promoShow);
     }
 }

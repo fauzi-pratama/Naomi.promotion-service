@@ -21,7 +21,7 @@ namespace Naomi.promotion_service.Services.EngineService
             _workflowService = workflowService;
         }
 
-        public async Task<(List<EnginePromoResponse>, string, bool)> GetDataEnginePromo(EnginePromoRequest enginePromoRequest)
+        public async Task<(List<EnginePromoResponse>, string, bool)> GetDataEnginePromoAsync(EnginePromoRequest enginePromoRequest)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Naomi.promotion_service.Services.EngineService
                 foreach (var loopCompanyWorkflow in listCompanyWorkflowEngine)
                 {
                     (List<RulesEngine.Models.RuleResultTree> listResultEngine, string message, bool cek ) = 
-                        await _promoSetupService.GetPromo(loopCompanyWorkflow, findPromoRequest, true);
+                        await _promoSetupService.GetPromoAsync(loopCompanyWorkflow, findPromoRequest, true);
 
                     foreach (var loopResultEngine in listResultEngine)
                     {

@@ -7,6 +7,6 @@ namespace Naomi.promotion_service.Services.EngineService
     public interface IEngineService
     {
         (string, bool) RefreshWorkflow();
-        Task<(List<EnginePromoResponse>, string, bool)> GetDataEnginePromo(EnginePromoRequest enginePromoRequest);
+        Task<(List<EnginePromoResponse>, string, bool)> GetDataEnginePromoAsync(EnginePromoRequest enginePromoRequest);
     }
 }

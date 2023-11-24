@@ -14,7 +14,7 @@ namespace Naomi.promotion_service.Services.SAPService
             _dataDbContext = dataDbContext;
         }
 
-        public async Task<(bool, string)> HandleMessageCompany(SiteMessage message)
+        public async Task<(bool, string)> HandleMessageCompanyAsync(SiteMessage message)
         {
             try
             {
@@ -59,7 +59,7 @@ namespace Naomi.promotion_service.Services.SAPService
             return (true, "Success");
         }
 
-        public async Task<(bool, string)> HandleMessageSite(SiteMessage message)
+        public async Task<(bool, string)> HandleMessageSiteAsync(SiteMessage message)
         {
             try
             {
@@ -102,7 +102,7 @@ namespace Naomi.promotion_service.Services.SAPService
             return (true, "Success");
         }
 
-        public async Task<(bool, string)> HandleMessageZone(SiteMessage message)
+        public async Task<(bool, string)> HandleMessageZoneAsync(SiteMessage message)
         {
             try
             {
@@ -146,7 +146,7 @@ namespace Naomi.promotion_service.Services.SAPService
             return (true, "Success");
         }
 
-        public async Task<(bool, string)> HandleMessageMop(MopMessage message)
+        public async Task<(bool, string)> HandleMessageMopAsync(MopMessage message)
         {
             try
             {

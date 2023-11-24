@@ -15,7 +15,7 @@ namespace Naomi.promotion_service.Services.SoftBookingService
             _dbContext = dbContext;
         }
 
-        public async Task<(List<string>, string, bool)> CekPromoAvail(List<PromoRuleCekAvailRequest> listPromo, string companyCode)
+        public async Task<(List<string>, string, bool)> CekPromoAvailAsync(List<PromoRuleCekAvailRequest> listPromo, string companyCode)
         {
             List<string> listPromoAvailResult = new();
 
@@ -57,7 +57,7 @@ namespace Naomi.promotion_service.Services.SoftBookingService
             return (listPromoAvailResult, "SUCCESS", true);
         }
 
-        public async Task<(bool, string)> PromoRollBackBeforeCommit(PromoWorkflow promoWorkflow, PromoTrans promoTrans)
+        public async Task<(bool, string)> PromoRollBackBeforeCommitAsync(PromoWorkflow promoWorkflow, PromoTrans promoTrans)
         {
             //looping detail transaction untuk rollback data promo master booking
             foreach (var loopPromoTransDetail in promoTrans.PromoTransDetail!)

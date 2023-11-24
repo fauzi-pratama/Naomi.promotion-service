@@ -24,7 +24,7 @@ namespace Naomi.promotion_service.Services.OtpPromoService
             _emailService = emailService;
         }
 
-        public async Task<(bool, string)> GetOtp(PromoOtpRequest promoOtpRequest)
+        public async Task<(bool, string)> GetOtpAsync(PromoOtpRequest promoOtpRequest)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace Naomi.promotion_service.Services.OtpPromoService
 
                 using (StreamReader sr = new(path))
                 {
-                    emailTemplate = sr.ReadToEnd();
+                    emailTemplate = await sr.ReadToEndAsync();
                     emailTemplate = emailTemplate.Replace("{varOtpCode}", otpCode);
                 }
 
@@ -98,7 +98,7 @@ namespace Naomi.promotion_service.Services.OtpPromoService
             }
         }
 
-        public async Task<(bool, string)> ConfirmOtp(ParamsConfirmOtpDto paramsConfirmOtpDto)
+        public async Task<(bool, string)> ConfirmOtpAsync(ParamsConfirmOtpDto paramsConfirmOtpDto)
         {
             try
             {

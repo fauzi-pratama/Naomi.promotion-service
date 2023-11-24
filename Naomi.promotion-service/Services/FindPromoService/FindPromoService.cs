@@ -29,7 +29,7 @@ namespace Naomi.promotion_service.Services.FindPromoService
             _softBookingService = softBookingService;
         }
 
-        public async Task<(List<FindPromoResponse>, string, bool)> FindPromo(FindPromoRequest findPromoRequest)
+        public async Task<(List<FindPromoResponse>, string, bool)> FindPromoAsync(FindPromoRequest findPromoRequest)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace Naomi.promotion_service.Services.FindPromoService
                     };
 
                     (bool cekOtp, string messageOtp) =
-                        await _otpService.ConfirmOtp(paramsConfirmOtpDto);
+                        await _otpService.ConfirmOtpAsync(paramsConfirmOtpDto);
 
                     if (!cekOtp)
                         return (new List<FindPromoResponse>(), $"Failed cek Otp : {messageOtp}", false);
@@ -77,7 +77,7 @@ namespace Naomi.promotion_service.Services.FindPromoService
                     if (promoTransBeforeCommited.Commited)
                         return (new List<FindPromoResponse>(), $"Transaction id {findPromoRequest.TransId} already commited", false);
 
-                    (bool cekRollBack, string messageRollBack) = await _softBookingService.PromoRollBackBeforeCommit(promoWorkflow, promoTransBeforeCommited);
+                    (bool cekRollBack, string messageRollBack) = await _softBookingService.PromoRollBackBeforeCommitAsync(promoWorkflow, promoTransBeforeCommited);
 
                     if (!cekRollBack)
                         return (new List<FindPromoResponse>(), $"Failed rollback transaction id {findPromoRequest.TransId} : {messageRollBack}", false);
@@ -116,7 +116,7 @@ namespace Naomi.promotion_service.Services.FindPromoService
 
                 //Call Engine untuk mendapatkan promo
                 (List<RulesEngine.Models.RuleResultTree>? listPromoResult, string messageGetPromo, bool cekGetPromo) =
-                    await _promoSetupService.GetPromo(paramsPromoDto.CompanyCode!, paramsPromoDto);
+                    await _promoSetupService.GetPromoAsync(paramsPromoDto.CompanyCode!, paramsPromoDto);
 
                 if (listPromoResult is null || listPromoResult.Count < 1)
                 {
@@ -156,7 +156,7 @@ namespace Naomi.promotion_service.Services.FindPromoService
                     listPromoCekAvail.Add(promoCekAvail);
                 }
 
-                (List<string> listPromoAvail, string messageCekQuota, bool cekQuota) = await _softBookingService.CekPromoAvail(listPromoCekAvail, findPromoRequest.CompanyCode!);
+                (List<string> listPromoAvail, string messageCekQuota, bool cekQuota) = await _softBookingService.CekPromoAvailAsync(listPromoCekAvail, findPromoRequest.CompanyCode!);
 
                 if (!cekQuota)
                     return (new List<FindPromoResponse>(), $"Failed cek Quota Promo : {messageCekQuota}", false);
@@ -184,7 +184,7 @@ namespace Naomi.promotion_service.Services.FindPromoService
             }
         }
 
-        public async Task<(List<ResultFindPromoWithoutEngineDto>?, string, bool)> FindPromoWithoutEngine(ParamsFindPromoWithoutEngineDto findPromoWithoutEngineRequest, bool promoShow)
+        public async Task<(List<ResultFindPromoWithoutEngineDto>?, string, bool)> FindPromoWithoutEngineAsync(ParamsFindPromoWithoutEngineDto findPromoWithoutEngineRequest, bool promoShow)
         {
             try
             {

@@ -96,9 +96,9 @@ namespace Naomi.promotion_test
             SoftBookingService softBookingService = new(_dbContext!);
             Mock<ISoftBookingService> mockSoftBookingService = new();
 
-            (List<string> data, string message, bool cek) = await softBookingService.CekPromoAvail(promoRuleCekAvailRequests!, companyCode!);
+            (List<string> data, string message, bool cek) = await softBookingService.CekPromoAvailAsync(promoRuleCekAvailRequests!, companyCode!);
 
-            mockSoftBookingService.Setup(q => q.CekPromoAvail(It.IsAny<List<PromoRuleCekAvailRequest>>(), It.IsAny<string>())).ReturnsAsync((data, message, cek));
+            mockSoftBookingService.Setup(q => q.CekPromoAvailAsync(It.IsAny<List<PromoRuleCekAvailRequest>>(), It.IsAny<string>())).ReturnsAsync((data, message, cek));
 
             return mockSoftBookingService;
         }
@@ -119,7 +119,7 @@ namespace Naomi.promotion_test
                 new(_dbContext!, _promoSetupService, GetMockOtpService().Object,
                     GetMockSoftBookingService(promoRuleCekAvailRequests, findPromoRequest.CompanyCode!).Result.Object, _mapper);
 
-            return await findPromoService.FindPromo(findPromoRequest);
+            return await findPromoService.FindPromoAsync(findPromoRequest);
         }
 
         [Fact]

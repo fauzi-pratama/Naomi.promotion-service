@@ -21,7 +21,7 @@ namespace Naomi.promotion_service.Controllers.MessageHandler
 
         [NonAction]
         [CapSubscribe("promo_email_user")]
-        public async Task PromoEmailSubscriber(ServiceMessage message)
+        public async Task PromoEmailSubscriberAsync(ServiceMessage message)
         {
             if (message == null || message.SyncData == null)
             {
@@ -34,7 +34,7 @@ namespace Naomi.promotion_service.Controllers.MessageHandler
             EmailUserMessage? dataEmailUser =
                 JsonConvert.DeserializeObject<EmailUserMessage>(JsonConvert.SerializeObject(data));
 
-            (bool cekStatusEmailUser, string messageStatusEmailUser) = await _emailService.SyncEmailUserPromo(dataEmailUser);
+            (bool cekStatusEmailUser, string messageStatusEmailUser) = await _emailService.SyncEmailUserPromoAsync(dataEmailUser);
 
             if (!cekStatusEmailUser)
                 _logger.LogError($"Failed Consume Email User {dataEmailUser.Nip} : {messageStatusEmailUser} ");

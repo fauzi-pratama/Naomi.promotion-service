@@ -15,7 +15,7 @@ namespace Naomi.promotion_service.Services.CommitService
             _dataDbContext = dataDbContext;
         }
 
-        public async Task<(bool, string)> CommitPromo(CommitRequest commitRequest)
+        public async Task<(bool, string)> CommitPromoAsync(CommitRequest commitRequest)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace Naomi.promotion_service.Services.CommitService
             }
         }
 
-        public async Task<(bool, string)> CancelPromo(CancelPromoRequest cancelPromoRequest, bool commited = false)
+        public async Task<(bool, string)> CancelPromoAsync(CancelPromoRequest cancelPromoRequest, bool commited = false)
         {
             //Get Data Transaction
             PromoTrans? promoTrans = await _dataDbContext.PromoTrans.Include(q => q.PromoTransDetail)

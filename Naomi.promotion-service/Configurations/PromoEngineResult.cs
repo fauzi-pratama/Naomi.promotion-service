@@ -22,10 +22,10 @@ namespace Naomi.promotion_service.Configurations
             var dataPromo = JsonConvert.DeserializeObject<PromoRule>(context.GetContext<string>("datapromo"));
 
             //Return Calculate per Promo
-            return await CalculatePromoSingle(dataPromo!, dataCart!);
+            return await CalculatePromoSingleAsync(dataPromo!, dataCart!);
         }
 
-        public static async Task<ResultPromoDto> CalculatePromoSingle(PromoRule dataPromo, ParamsPromoDto dataCart)
+        public static async Task<ResultPromoDto> CalculatePromoSingleAsync(PromoRule dataPromo, ParamsPromoDto dataCart)
         {
             int linePromoCount = 1;
             List<PromoListItemDto> responseDetail = new(); //Variable untuk save data detail item semua group

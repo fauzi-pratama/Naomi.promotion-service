@@ -30,7 +30,7 @@ namespace Naomi.promotion_service.Services.PromoSetupService
             }
         }
 
-        public async Task<(List<RuleResultTree> data, string, bool)> GetPromo(string workflowPromo, object findDataPromo, bool getDetail = false)
+        public async Task<(List<RuleResultTree> data, string, bool)> GetPromoAsync(string workflowPromo, object findDataPromo, bool getDetail = false)
         {
             try
             {
