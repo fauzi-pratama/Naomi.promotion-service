@@ -25,7 +25,7 @@ namespace Naomi.promotion_service.Controllers.MessageHandler
         {
             if (message == null || message.SyncData == null)
             {
-                _logger.LogError("Message is null");
+                _logger.LogError("Failed Consume Email Message is null");
                 return;
             }
 

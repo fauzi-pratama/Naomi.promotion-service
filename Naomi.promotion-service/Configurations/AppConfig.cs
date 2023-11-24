@@ -9,5 +9,6 @@ namespace Naomi.promotion_service.Configurations
         public string? EmailHost { get; set; }
         public int EmailPort { get; set; }
         public string? TemplateRandomOtp { get; set; }
+        public string? PublicKey { get; set; }
     }
 }

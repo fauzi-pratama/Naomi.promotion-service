@@ -24,7 +24,7 @@ namespace Naomi.promotion_service.Controllers.MessageHandler
         {
             if (message == null || message.SyncData == null)
             {
-                _logger.LogError("Message is null");
+                _logger.LogError("Failed Consume Site Message is null");
                 return;
             }
 
@@ -59,7 +59,7 @@ namespace Naomi.promotion_service.Controllers.MessageHandler
         {
             if (message == null || message.SyncData == null)
             {
-                _logger.LogError("Message is null");
+                _logger.LogError("Failed Consume Mop Message is null");
                 return;
             }
 

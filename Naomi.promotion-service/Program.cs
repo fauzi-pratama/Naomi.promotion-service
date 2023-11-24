@@ -1,11 +1,14 @@
 
 using System.Reflection;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
 using FluentValidation.AspNetCore;
 using Swashbuckle.AspNetCore.Filters;
 using VaultSharp.Extensions.Configuration;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Naomi.promotion_service.Configurations;
 using Naomi.promotion_service.Models.Contexts;
 using Naomi.promotion_service.Services.SAPService;
@@ -74,6 +77,22 @@ builder.Services.AddHostedService<InitialPromoBackground>();
 //Config Automapper
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
+//Config Jwt Auth
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    var rsa = RSA.Create();
+    rsa.ImportFromPem(appConfig.PublicKey!);
+
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new RsaSecurityKey(rsa)
+    };
+});
+
 //Confgi Filter Validation
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
@@ -124,6 +143,7 @@ app.UseSwaggerUI(c => {
 app.UseHttpsRedirection();
 
 //Run Auth
+app.UseAuthentication();
 app.UseAuthorization();
 
 //Run Contoller

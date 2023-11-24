@@ -2,6 +2,7 @@
 using AutoMapper;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using Naomi.promotion_service.Models.Dto;
 using Naomi.promotion_service.Models.Request;
 using Naomi.promotion_service.Models.Response;
@@ -9,6 +10,7 @@ using Naomi.promotion_service.Services.FindPromoService;
 
 namespace Naomi.promotion_service.Controllers.RestApi.v1
 {
+    [Authorize]
     [Route("/v1/")]
     [ApiController]
     public class FindController : ControllerBase
