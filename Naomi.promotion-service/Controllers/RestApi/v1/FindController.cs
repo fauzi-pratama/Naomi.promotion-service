@@ -1,5 +1,6 @@
 ﻿
 using AutoMapper;
+using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc;
 using Naomi.promotion_service.Models.Dto;
 using Naomi.promotion_service.Models.Request;
@@ -26,6 +27,9 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
         [HttpPost("find_promo")]
         public async Task<ActionResult<ServiceResponse<List<FindPromoResponse>>>> FindPromoAsync([FromBody] FindPromoRequest findPromoRequest)
         {
+            string dataJson = JsonConvert.SerializeObject(findPromoRequest);
+            _logger.LogInformation($"find_promo called with company : {findPromoRequest.CompanyCode}, transid : {findPromoRequest.TransId}, datajson : {dataJson} ");
+
             (List<FindPromoResponse> data, string message, bool cek) = await _findPromoService.FindPromoAsync(findPromoRequest);
 
             ServiceResponse<List<FindPromoResponse>> serviceResponse = new()
@@ -36,11 +40,13 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
             };
 
             if (cek)
+            {
+                _logger.LogInformation($"find_promo success with company : {findPromoRequest.CompanyCode}, transid : {findPromoRequest.TransId}, message : {message}");
                 return Ok(serviceResponse);
+            }
             else
             {
-                _logger.LogError(message);
-
+                _logger.LogError($"find_promo failed with company : {findPromoRequest.CompanyCode}, transid : {findPromoRequest.TransId}, message : {message}");
                 return NotFound(serviceResponse);
             }
         }
@@ -48,6 +54,9 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
         [HttpPost("find_promo_show")]
         public async Task<ActionResult<ServiceResponse<List<FindPromoShowResponse>>>> FindPromoShowAsync([FromBody] FindPromoShowRequest findPromoShowRequest)
         {
+            string dataJson = JsonConvert.SerializeObject(findPromoShowRequest);
+            _logger.LogInformation($"find_promo_show called with company : {findPromoShowRequest.CompanyCode}, datajson : {dataJson}");
+
             ParamsFindPromoWithoutEngineDto paramsFindPromoWithoutEngineDto = _mapper.Map<ParamsFindPromoWithoutEngineDto>(findPromoShowRequest);
             (List<ResultFindPromoWithoutEngineDto>? data, string message, bool cek) = await _findPromoService.FindPromoWithoutEngineAsync(paramsFindPromoWithoutEngineDto, true);
 
@@ -59,11 +68,13 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
             };
 
             if (cek)
+            {
+                _logger.LogInformation($"find_promo_show success with company : {findPromoShowRequest.CompanyCode}, message : {message}");
                 return Ok(serviceResponse);
+            }
             else
             {
-                _logger.LogError(message);
-
+                _logger.LogError($"find_promo_show failed with company : {findPromoShowRequest.CompanyCode}, message : {message}");
                 return NotFound(serviceResponse);
             }
         }
@@ -71,6 +82,9 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
         [HttpPost("find_promo_redeem")]
         public async Task<ActionResult<ServiceResponse<List<FindPromoRedeemResponse>>>> FindPromoRedeemAsync([FromBody] FindPromoRedeemRequest findPromoRedeemRequest)
         {
+            string dataJson = JsonConvert.SerializeObject(findPromoRedeemRequest);
+            _logger.LogInformation($"find_promo_redeem called with company : {findPromoRedeemRequest.CompanyCode}, datajson : {dataJson}");
+
             ParamsFindPromoWithoutEngineDto paramsFindPromoWithoutEngineDto = _mapper.Map<ParamsFindPromoWithoutEngineDto>(findPromoRedeemRequest);
             (List<ResultFindPromoWithoutEngineDto>? data, string message, bool cek) = await _findPromoService.FindPromoWithoutEngineAsync(paramsFindPromoWithoutEngineDto, false);
 
@@ -82,11 +96,13 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
             };
 
             if (cek)
+            {
+                _logger.LogInformation($"find_promo_redeem success with company : {findPromoRedeemRequest.CompanyCode}, message : {message}");
                 return Ok(serviceResponse);
+            }
             else
             {
-                _logger.LogError(message);
-
+                _logger.LogError($"find_promo_redeem failed with company : {findPromoRedeemRequest.CompanyCode}, message : {message}");
                 return NotFound(serviceResponse);
             }
         }

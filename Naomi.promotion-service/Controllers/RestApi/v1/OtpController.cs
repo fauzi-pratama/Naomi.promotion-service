@@ -22,11 +22,13 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
         [HttpPost("get_promo_otp")]
         public async Task<ActionResult<ServiceResponse<string>>> GetPromoOtpAsync(PromoOtpRequest promoOtpRequest)
         {
+            _logger.LogInformation($"get_promo_otp called with nip : {promoOtpRequest.Nip}");
+
             (bool cekGetOtp, string msgGetOtp) = await _otpService.GetOtpAsync(promoOtpRequest);
 
             if (!cekGetOtp)
             {
-                _logger.LogError($"Failed Get Otp {promoOtpRequest.Nip} : {msgGetOtp} ");
+                _logger.LogError($"get_promo_otp with nip : {promoOtpRequest.Nip} Failed Get Otp : {msgGetOtp} ");
 
                 return NotFound(new ServiceResponse<string>
                 {
@@ -41,6 +43,7 @@ namespace Naomi.promotion_service.Controllers.RestApi.v1
                 Data = "Success Get Otp",
             };
 
+            _logger.LogInformation($"get_promo_otp with Success Get Otp {promoOtpRequest.Nip} : {msgGetOtp} ");
             return Ok(serviceResponse);
         }
     }
