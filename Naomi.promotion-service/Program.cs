@@ -1,10 +1,11 @@
 
 using System.Reflection;
-using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation.AspNetCore;
 using Swashbuckle.AspNetCore.Filters;
+using VaultSharp.Extensions.Configuration;
 using Naomi.promotion_service.Configurations;
 using Naomi.promotion_service.Models.Contexts;
 using Naomi.promotion_service.Services.SAPService;
@@ -19,6 +20,11 @@ using Naomi.promotion_service.Services.WorkflowPromoService;
 
 //Config App
 var builder = WebApplication.CreateBuilder(args);
+
+//Config Vault
+VaultConfig? vaultConfig = builder.Configuration.GetSection("Vault").Get<VaultConfig>();
+builder.Configuration.AddJsonFile("appsettings.json").AddVaultConfiguration(() =>
+    new VaultOptions(vaultAddress: vaultConfig.Link!, vaultToken: vaultConfig.Token), vaultConfig.BasePath!, vaultConfig.MountPoint!);
 
 //Config Env
 builder.Services.Configure<AppConfig>(builder.Configuration);

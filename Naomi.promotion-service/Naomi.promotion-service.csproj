@@ -17,9 +17,9 @@
     <PackageReference Include="DotNetCore.CAP.Dashboard" Version="7.2.2" />
     <PackageReference Include="DotNetCore.CAP.Kafka" Version="7.2.2" />
     <PackageReference Include="DotNetCore.CAP.PostgreSql" Version="7.2.2" />
-    <PackageReference Include="FluentValidation" Version="11.8.0" />
+    <PackageReference Include="FluentValidation" Version="11.8.1" />
     <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.8.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -32,6 +32,8 @@
     <PackageReference Include="RulesEngine" Version="5.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.12" />
+    <PackageReference Include="VaultSharp" Version="1.13.0.1" />
+    <PackageReference Include="VaultSharp.Extensions.Configuration" Version="0.6.4" />
   </ItemGroup>
 
 </Project>

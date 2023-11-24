@@ -1,12 +1,12 @@
 ﻿
-using Microsoft.EntityFrameworkCore;
+using System.Net.Mail;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
 using Naomi.promotion_service.Configurations;
-using Naomi.promotion_service.Models.Contexts;
 using Naomi.promotion_service.Models.Dto;
+using Naomi.promotion_service.Models.Contexts;
 using Naomi.promotion_service.Models.Entities;
 using Naomi.promotion_service.Models.Message.Consume;
-using System.Net.Mail;
 
 namespace Naomi.promotion_service.Services.EmailService
 {
