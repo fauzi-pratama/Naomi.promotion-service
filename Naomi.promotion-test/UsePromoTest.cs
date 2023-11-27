@@ -91,7 +91,7 @@ namespace Naomi.promotion_test
             return mockOtpService;
         }
 
-        private static async Task<Mock<ISoftBookingService>> GetMockSoftBookingService(List<PromoRuleCekAvailRequest> promoRuleCekAvailRequests, string companyCode)
+        private static async Task<Mock<ISoftBookingService>> GetMockSoftBookingServiceAsync(List<PromoRuleCekAvailRequest> promoRuleCekAvailRequests, string companyCode)
         {
             SoftBookingService softBookingService = new(_dbContext!);
             Mock<ISoftBookingService> mockSoftBookingService = new();
@@ -113,17 +113,17 @@ namespace Naomi.promotion_test
             return mockMapper.CreateMapper();
         }
 
-        private async Task<(List<FindPromoResponse>, string, bool)> FindPromoTest(FindPromoRequest findPromoRequest, List<PromoRuleCekAvailRequest> promoRuleCekAvailRequests)
+        private async Task<(List<FindPromoResponse>, string, bool)> FindPromoTestAsync(FindPromoRequest findPromoRequest, List<PromoRuleCekAvailRequest> promoRuleCekAvailRequests)
         {
             FindPromoService findPromoService =
                 new(_dbContext!, _promoSetupService, GetMockOtpService().Object,
-                    GetMockSoftBookingService(promoRuleCekAvailRequests, findPromoRequest.CompanyCode!).Result.Object, _mapper);
+                (await GetMockSoftBookingServiceAsync(promoRuleCekAvailRequests, findPromoRequest.CompanyCode!)).Object, _mapper);
 
             return await findPromoService.FindPromoAsync(findPromoRequest);
         }
 
         [Fact]
-        public async void TestPromoSetupService()
+        public async Task TestPromoSetupServiceAsync()
         {
             //Request
             FindPromoRequest findPromoRequest = new()
@@ -239,7 +239,7 @@ namespace Naomi.promotion_test
             };
 
             //Run Function Testing
-            (List<FindPromoResponse> data, string message, bool cek) = await FindPromoTest(findPromoRequest, promoRuleCekAvailRequests);
+            (List<FindPromoResponse> data, string message, bool cek) = await FindPromoTestAsync(findPromoRequest, promoRuleCekAvailRequests);
 
             //Convert DataResponse to String
             string dataResponseExpString = JsonConvert.SerializeObject(findPromoResponses);
